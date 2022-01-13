@@ -14,14 +14,25 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                echo "------------>Checkout<------------"
+                checkout scm
+            }
+        }
         stage('Compile') {
             steps {
                 echo "------------>Compile<------------"
+                sh 'chmod +x ./gradlew'
+                sh './gradlew build -x test'
             }
         }
         stage('Unit Tests') {
             steps {
                 echo "------------>Unit Tests<------------"
+                sh './gradlew clean'
+                sh './gradlew test'
+                sh './gradlew jacocoTestReport'
             }
         }
         stage('Static Code Analysis') {
@@ -40,9 +51,11 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
+            junit 'build/test-results/test/*.xml'
         }
         failure {
             echo 'This will run only if failed'
+            mail (to: 'yuliana.canas@ceiba.com.co', subject: "Failed Pipeline:${currentBuild.fullDisplayName}", body: "Something is wrong with ${env.BUILD_URL}")
         }
         unstable {
             echo 'This will run only if the run was marked as unstable'
