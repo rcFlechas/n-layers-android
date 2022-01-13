@@ -10,7 +10,7 @@ pipeline {
     }
 
     tools {
-        jdk 'JDK8_Mac'
+        jdk 'JDK11_Mac'
     }
 
     stages {
