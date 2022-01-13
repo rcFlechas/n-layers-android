@@ -4,7 +4,7 @@ plugins {
     id 'jacoco'
 }
 
-task jacocoTestReport (type: JacocoReport, dependsOn: [':app:taskTest']){
+task jacocoTestReport (type: JacocoReport){
 
     def appModule = project(':app')
     def directoriesToCoverage = layout.files("$buildDir/tmp/kotlin-classes/debug", "$appModule.buildDir/tmp/kotlin-classes/debug")
