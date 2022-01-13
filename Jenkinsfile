@@ -14,12 +14,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo "------------>Checkout<------------"
-                checkout scm
-            }
-        }
         stage('Compile') {
             steps {
                 echo "------------>Compile<------------"
@@ -31,7 +25,6 @@ pipeline {
             steps {
                 echo "------------>Unit Tests<------------"
                 sh './gradlew clean'
-                sh './gradlew test'
                 sh './gradlew jacocoTestReport'
             }
         }
@@ -51,7 +44,6 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
-            junit 'build/test-results/test/*.xml'
         }
         failure {
             echo 'This will run only if failed'
