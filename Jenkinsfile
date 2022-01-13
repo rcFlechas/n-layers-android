@@ -39,7 +39,7 @@ pipeline {
             steps {
                 echo "------------>Static Code Analysis<------------"
                 withSonarQubeEnv('Sonar') {
-                    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -D project.settings=sonar-project.properties"
+                    sh "${tool name: 'SonarScanner-Mac', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
                 }
             }
         }
