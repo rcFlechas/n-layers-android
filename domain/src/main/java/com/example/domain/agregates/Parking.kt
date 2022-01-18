@@ -17,16 +17,6 @@ data class Parking(
     val state: State
 ) {
 
-    private val FIRST_REGISTER_LETTER = 'A'
-    private val COST_BY_HOUR_CAR = 1000
-    private val COST_BY_HOUR_MOTORCYCLE = 500
-    private val COST_BY_DAY_CAR = 8000
-    private val COST_BY_DAY_MOTORCYCLE = 4000
-    private val TWENTY_FOUR_HOURS = 24.0
-    private val NINE_HOURS = 9.0
-    private val CYLINDER_CAPACITY = 500
-    private val COST_PLUS_BY_CYLINDER_CAPACITY = 2000
-
     fun isValidEntryByRegister(): Boolean {
 
         val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
@@ -40,13 +30,14 @@ data class Parking(
         }
     }
 
-    fun getTotalPay(): String {
-        return if (vehicle is Car) {
-            this.calculateTotalPayByCar().toPlainString()
-        } else {
-            this.calculateTotalPayByMotorCycle().toPlainString()
+    val totalPay: String
+        get() {
+            return if (vehicle is Car) {
+                this.calculateTotalPayByCar().toPlainString()
+            } else {
+                this.calculateTotalPayByMotorCycle().toPlainString()
+            }
         }
-    }
 
     private fun calculateTotalPayByCar(): BigDecimal {
 
@@ -87,5 +78,17 @@ data class Parking(
         if (motorCycle.cylinderCapacity > CYLINDER_CAPACITY) total+= COST_PLUS_BY_CYLINDER_CAPACITY
 
         return BigDecimal(total)
+    }
+
+    companion object {
+        private const val FIRST_REGISTER_LETTER = 'A'
+        private const val COST_BY_HOUR_CAR = 1000
+        private const val COST_BY_HOUR_MOTORCYCLE = 500
+        private const val COST_BY_DAY_CAR = 8000
+        private const val COST_BY_DAY_MOTORCYCLE = 4000
+        private const val TWENTY_FOUR_HOURS = 24.0
+        private const val NINE_HOURS = 9.0
+        private const val CYLINDER_CAPACITY = 500
+        private const val COST_PLUS_BY_CYLINDER_CAPACITY = 2000
     }
 }

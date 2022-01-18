@@ -34,7 +34,7 @@ class ParkingService (private val parkingRepository: ParkingRepository) {
         var result = "Total to Pay: "
         if (parkingRepository.update(parking)) {
             val outParking = parkingRepository.getById(parking.id)
-            result.plus(outParking.getTotalPay())
+            result.plus(outParking.totalPay)
         } else {
             result = "Output cannot be performed."
         }

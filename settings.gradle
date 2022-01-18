@@ -9,6 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "ADNCeiba"
 include ':app'
 include ':domain'
-include ':presentation'
 include ':database'
-include ':common'

@@ -1,11 +1,9 @@
 plugins {
-    id 'com.android.library'
+    id 'kotlin'
     id 'kotlin-kapt'
 }
 
 dependencies {
-
-    implementation project(":common")
 
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.20'
     testImplementation 'junit:junit:4.13.1'
