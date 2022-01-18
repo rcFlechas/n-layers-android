@@ -15,17 +15,17 @@ data class ParkingEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "park_id")
-    val id: Long,
+    val id: Long = 0L,
 
     @ColumnInfo(name = "park_in_date")
-    val inDate: Date,
+    val inDate: Date = Date(),
 
     @ColumnInfo(name = "park_out_date")
-    val outDate: Date,
+    val outDate: Date = Date(),
 
     @ColumnInfo(name = "park_state")
     val state: State = State.IN,
 
     @ColumnInfo(name = "vehi_id")
-    val vehicleId: Long
+    val vehicleId: Long = 0L
 )
