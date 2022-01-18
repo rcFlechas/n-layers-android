@@ -3,6 +3,7 @@ package com.example.domain.services
 import com.example.domain.agregates.Parking
 import com.example.domain.entities.Car
 import com.example.domain.entities.MotorCycle
+import com.example.domain.enum.State
 import com.example.domain.repositories.ParkingRepository
 
 class ParkingService (private val parkingRepository: ParkingRepository) {
@@ -16,7 +17,7 @@ class ParkingService (private val parkingRepository: ParkingRepository) {
             return "Not authorized to enter."
         }
 
-        val listParking = getAll()
+        val listParking = getAllByState(State.IN)
         if (!isSpaceAvailable(listParking, parking)) {
             return "There is no space available."
         }
@@ -45,7 +46,7 @@ class ParkingService (private val parkingRepository: ParkingRepository) {
                 (parking.vehicle is MotorCycle && getSizeByMotorCycle(listParking) < MAX_MOTORCYCLE)
     }
 
-    private fun getAll() = parkingRepository.getAll()
+    private fun getAllByState(state: State) = parkingRepository.getAllByState(state)
 
     private fun getSizeByCar(listParking: List<Parking>) = listParking.filter { it.vehicle is Car }.size
 
