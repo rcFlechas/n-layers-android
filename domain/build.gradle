@@ -1,4 +1,6 @@
 apply from: "$rootDir/common-kotlin-library.gradle"
 
 dependencies {
+
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
 }
