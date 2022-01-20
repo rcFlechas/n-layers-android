@@ -1,10 +1,11 @@
 package com.example.domain.services
 
-import com.example.domain.agregates.Place
-import com.example.domain.entities.Car
+import com.example.domain.entities.CarBuilder.Companion.aCar
+import com.example.domain.entities.PlaceBuilder.Companion.aPlace
+import com.example.domain.entities.TimeBusyBuilder.Companion.aTimeBusy
 import com.example.domain.enum.State
+import com.example.domain.exceptions.EntryNotAuthorizedException
 import com.example.domain.fakes.FakePlaceRepository
-import com.example.domain.valueobjects.TimeBusy
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.Before
@@ -22,19 +23,23 @@ class PlaceServiceTest {
 
         fakePlaceRepository = FakePlaceRepository()
 
-        val car1 = Car(id = 1, register = "AAA")
-        val timeBusy1 = TimeBusy(
-            inDate = Date(2022, 1, 14, 13, 30),
-            outDate = Date(2022, 1, 14, 14, 0)
-        )
-        val place1 = Place(id = 1, vehicle = car1, timeBusy = timeBusy1, state = State.OUT)
+        val place1 = aPlace()
+            .build()
 
-        val car2 = Car(id = 2, register = "BBB")
-        val timeBusy2 = TimeBusy(
-            inDate = Date(2022, 1, 14, 14, 30),
-            outDate = Date(2022, 1, 14, 14, 30)
-        )
-        val place2 = Place(id = 2, vehicle = car2, timeBusy = timeBusy2, state = State.IN)
+        val place2 = aPlace()
+            .withId(2)
+            .with(
+                aCar()
+                    .withId(3)
+                    .withRegister("CCC")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate(Date(2022, 1, 14, 14, 30))
+                    .withFreeDate(Date(2022, 1, 14, 14, 30))
+            )
+            .withState(State.IN)
+            .build()
 
         fakePlaceRepository.addPlaces(place1, place2)
 
@@ -42,17 +47,59 @@ class PlaceServiceTest {
     }
 
     @Test
-    fun entry_isSave_returnTrue() {
+    fun entry_isEntry_returnTrue() {
 
-        val car3 = Car(id = 2, register = "CCC")
-        val timeBusy3 = TimeBusy(
-            inDate = Date(2022, 1, 14, 15, 30),
-            outDate = Date(2022, 1, 14, 15, 30)
-        )
-        val place3 = Place(id = 3, vehicle = car3, timeBusy = timeBusy3, state = State.IN)
+        //Arrange
+        val place3 = aPlace()
+            .withId(3)
+            .with(
+                aCar()
+                    .withId(4)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate(Date(2022, 1, 14, 15, 30))
+                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+            )
+            .withState(State.IN)
+            .build()
 
-        val result = placeService.entry(place3)
+        //Act
+        val isEntry = placeService.entry(place3)
 
-        assertThat(result, `is`(true))
+        //Assert
+        assertThat(isEntry, `is`(true))
+    }
+
+    @Test
+    fun entry_isSave_returnEntryNotAuthorizedException() {
+
+        //Arrange
+        val place4 = aPlace()
+            .withId(4)
+            .with(
+                aCar()
+                    .withId(5)
+                    .withRegister("AEE")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate(Date(2022, 1, 14, 15, 30))
+                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+            )
+            .withState(State.IN)
+            .build()
+
+        //Act
+        val isEntryNotAuthorizedException = try {
+            placeService.entry(place4)
+            false
+        } catch (entryNotAuthorizedException: EntryNotAuthorizedException) {
+            true
+        }
+
+        //Assert
+        assertThat(isEntryNotAuthorizedException, `is`(true))
     }
 }

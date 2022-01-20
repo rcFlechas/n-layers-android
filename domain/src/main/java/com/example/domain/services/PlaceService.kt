@@ -16,8 +16,8 @@ class PlaceService (private val placeRepository: PlaceRepository) {
         if (!place.isValidEntryByRegister()) {
             throw EntryNotAuthorizedException()
         }
-        val listParking = getAllByState(State.IN)
-        if (!isSpaceAvailable(listParking, place)) {
+        val listPlaces = getAllPlacesByState(State.IN)
+        if (!thereArePlacesAvailable(listPlaces, place)) {
             throw NotPlaceAvailableException()
         }
         return placeRepository.save(place)
@@ -41,7 +41,7 @@ class PlaceService (private val placeRepository: PlaceRepository) {
 
     fun getAll() = placeRepository.getAll()
 
-    fun getAllByState(state: State) = placeRepository.getAllByState(state)
+    fun getAllPlacesByState(state: State) = placeRepository.getAllByState(state)
 
     fun getById(placeId: Long) = placeRepository.getById(placeId)
 
@@ -49,7 +49,7 @@ class PlaceService (private val placeRepository: PlaceRepository) {
 
     private fun getSizeByMotorCycle(listPlace: List<Place>) = listPlace.filter { it.vehicle is MotorCycle }.size
 
-    private fun isSpaceAvailable(listPlace: List<Place>, place: Place): Boolean {
+    private fun thereArePlacesAvailable(listPlace: List<Place>, place: Place): Boolean {
         return  (place.vehicle is Car && getSizeByCar(listPlace) < MAX_CARS) ||
                 (place.vehicle is MotorCycle && getSizeByMotorCycle(listPlace) < MAX_MOTORCYCLE)
     }

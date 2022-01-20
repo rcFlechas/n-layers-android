@@ -8,23 +8,12 @@ import com.example.domain.valueobjects.TimeBusy
 import java.math.BigDecimal
 import java.util.*
 
-data class Place(
+class Place(
     val id: Long,
     val vehicle: Vehicle,
     val timeBusy: TimeBusy,
     var state: State
 ) {
-
-    fun isStateIn(): Boolean = (state == State.IN)
-
-    fun isValidEntryByRegister(): Boolean {
-        val character = vehicle.register[0]
-        return when {
-            (character != FIRST_REGISTER_LETTER) -> true
-            (character == FIRST_REGISTER_LETTER && isValidDay()) -> true
-            else -> false
-        }
-    }
 
     val totalPay: String
         get() {
@@ -34,6 +23,17 @@ data class Place(
                 this.calculateTotalPayByMotorCycle().toPlainString()
             }
         }
+
+    fun isStateIn(): Boolean = (state == State.IN)
+
+    fun isValidEntryByRegister(): Boolean { //todo cambiar nombre de la funcion
+        val character = vehicle.register[0]
+        return when {
+            (character != FIRST_REGISTER_LETTER) -> true
+            (character == FIRST_REGISTER_LETTER && isValidDay()) -> true
+            else -> false
+        }
+    }
 
     private fun calculateTotalPayByCar(): BigDecimal {
 

@@ -5,13 +5,13 @@ import com.example.common.extensions.differenceInHours
 import java.util.*
 
 class TimeBusy(
-    private val inDate: Date,
-    private val outDate: Date,
+    private val busyDate: Date,
+    private val freeDate: Date,
 ) {
 
     val hours : Double
-        get() = inDate.differenceInHours(outDate)
+        get() = busyDate.differenceInHours(freeDate)
 
     val daysWithHours : Pair<Double, Double>
-        get() = inDate.differenceInDaysWithHours(outDate)
+        get() = busyDate.differenceInDaysWithHours(freeDate)
 }

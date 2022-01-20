@@ -2,14 +2,11 @@ package com.example.domain.entities
 
 import com.example.domain.exceptions.EmojisNotAllowedException
 
-open class Vehicle {
+open class Vehicle(open var id: Long, register: String) {
 
-    open var id: Long = 0
     open var register: String = String()
 
-    constructor(id: Long, register: String) {
-
-        this.id = id
+    init {
         if (isNotEmojis(register)) {
             this.register = register
         } else {
