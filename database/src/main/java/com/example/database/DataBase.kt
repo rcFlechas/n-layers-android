@@ -6,14 +6,14 @@ import androidx.room.TypeConverters
 import com.example.database.converters.DateConverter
 import com.example.database.converters.StateConverter
 import com.example.database.converters.TypeVehicleConverter
-import com.example.database.dao.ParkingDAO
+import com.example.database.dao.PlaceDAO
 import com.example.database.dao.VehicleDAO
-import com.example.database.entities.ParkingEntity
+import com.example.database.entities.PlaceEntity
 import com.example.database.entities.VehicleEntity
 
 @Database(
     entities = [
-        ParkingEntity::class,
+        PlaceEntity::class,
         VehicleEntity::class
     ],
     version = 1
@@ -25,6 +25,6 @@ import com.example.database.entities.VehicleEntity
 )
 abstract class DataBase : RoomDatabase() {
 
-    abstract fun parkingDAO(): ParkingDAO
+    abstract fun placeDAO(): PlaceDAO
     abstract fun vehicleDAO(): VehicleDAO
 }

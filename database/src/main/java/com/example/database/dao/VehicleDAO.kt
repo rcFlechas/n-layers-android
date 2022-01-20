@@ -11,11 +11,11 @@ interface VehicleDAO {
 
     @Transaction
     @Query("SELECT * FROM vehicleEntity")
-    fun getAll(): Single<List<VehicleEntity>>
+    fun getVehiclesAll(): Single<List<VehicleEntity>>
 
     @Query("SELECT * FROM vehicleEntity WHERE vehi_id = :id")
-    fun getById(id: Long) : Maybe<VehicleEntity>
+    fun getVehicleById(id: Long) : Maybe<VehicleEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun save(vehicleEntity: VehicleEntity): Completable
+    fun saveVehicle(vehicleEntity: VehicleEntity): Completable
 }

@@ -5,9 +5,9 @@ import com.example.domain.enum.State
 
 interface PlaceRepository {
 
-    fun getAll(): List<Place>
-    fun getAllByState(state: State): List<Place>
-    fun getById(id: Long) : Place
-    fun save(place: Place): Boolean
-    fun update(place: Place): Boolean
+    fun getPlacesAll(): List<Place>
+    fun getPlacesAllByState(state: State): List<Place>
+    fun getPlaceById(id: Long) : Place
+    fun savePlace(place: Place): Boolean
+    fun updatePlace(place: Place): Boolean
 }

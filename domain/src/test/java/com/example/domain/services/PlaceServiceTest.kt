@@ -38,7 +38,7 @@ class PlaceServiceTest {
                     .withBusyDate(Date(2022, 1, 14, 14, 30))
                     .withFreeDate(Date(2022, 1, 14, 14, 30))
             )
-            .withState(State.IN)
+            .withState(State.BUSY)
             .build()
 
         fakePlaceRepository.addPlaces(place1, place2)
@@ -62,7 +62,7 @@ class PlaceServiceTest {
                     .withBusyDate(Date(2022, 1, 14, 15, 30))
                     .withFreeDate(Date(2022, 1, 14, 15, 30))
             )
-            .withState(State.IN)
+            .withState(State.BUSY)
             .build()
 
         //Act
@@ -88,7 +88,7 @@ class PlaceServiceTest {
                     .withBusyDate(Date(2022, 1, 14, 15, 30))
                     .withFreeDate(Date(2022, 1, 14, 15, 30))
             )
-            .withState(State.IN)
+            .withState(State.BUSY)
             .build()
 
         //Act

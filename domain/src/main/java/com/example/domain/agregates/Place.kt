@@ -24,9 +24,9 @@ class Place(
             }
         }
 
-    fun isStateIn(): Boolean = (state == State.IN)
+    fun isStateBusy(): Boolean = (state == State.BUSY)
 
-    fun isValidEntryByRegister(): Boolean { //todo cambiar nombre de la funcion
+    fun isOauthEntry(): Boolean {
         val character = vehicle.register[0]
         return when {
             (character != FIRST_REGISTER_LETTER) -> true

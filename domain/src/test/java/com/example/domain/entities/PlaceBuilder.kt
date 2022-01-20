@@ -15,7 +15,7 @@ class PlaceBuilder {
         .withBusyDate(Date(2022, 1, 14, 13, 30))
         .withFreeDate(Date(2022, 1, 14, 14, 0))
         .build()
-    private var state: State = State.OUT
+    private var state: State = State.FREE
 
     fun withId(id: Long): PlaceBuilder {
         this.id = id

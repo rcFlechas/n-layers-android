@@ -6,44 +6,44 @@ import com.example.domain.entities.MotorCycle
 import com.example.domain.enum.State
 import com.example.domain.exceptions.EntryNotAuthorizedException
 import com.example.domain.exceptions.NotPlaceAvailableException
-import com.example.domain.exceptions.PlaceOutException
+import com.example.domain.exceptions.PlaceFreeException
 import com.example.domain.repositories.PlaceRepository
 
 class PlaceService (private val placeRepository: PlaceRepository) {
 
     fun entry(place: Place): Boolean {
 
-        if (!place.isValidEntryByRegister()) {
+        if (!place.isOauthEntry()) {
             throw EntryNotAuthorizedException()
         }
-        val listPlaces = getAllPlacesByState(State.IN)
+        val listPlaces = getPlacesAllByState(State.BUSY)
         if (!thereArePlacesAvailable(listPlaces, place)) {
             throw NotPlaceAvailableException()
         }
-        return placeRepository.save(place)
+        return placeRepository.savePlace(place)
     }
 
     fun exit(placeId: Long): Boolean {
 
-        val outParking = placeRepository.getById(placeId)
-        if (!outParking.isStateIn()) {
-            throw PlaceOutException()
+        val freePlace = placeRepository.getPlaceById(placeId)
+        if (!freePlace.isStateBusy()) {
+            throw PlaceFreeException()
         }
-        outParking.state = State.OUT
-        return placeRepository.update(outParking)
+        freePlace.state = State.FREE
+        return placeRepository.updatePlace(freePlace)
     }
 
     fun getTotalPay(placeId: Long): String {
 
-        val outParking = placeRepository.getById(placeId)
-        return outParking.totalPay
+        val freePlace = placeRepository.getPlaceById(placeId)
+        return freePlace.totalPay
     }
 
-    fun getAll() = placeRepository.getAll()
+    fun getPlacesAll() = placeRepository.getPlacesAll()
 
-    fun getAllPlacesByState(state: State) = placeRepository.getAllByState(state)
+    fun getPlacesAllByState(state: State) = placeRepository.getPlacesAllByState(state)
 
-    fun getById(placeId: Long) = placeRepository.getById(placeId)
+    fun getPlaceById(placeId: Long) = placeRepository.getPlaceById(placeId)
 
     private fun getSizeByCar(listPlace: List<Place>) = listPlace.filter { it.vehicle is Car }.size
 

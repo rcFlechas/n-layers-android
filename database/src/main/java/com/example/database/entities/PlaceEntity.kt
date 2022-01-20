@@ -8,23 +8,23 @@ import com.example.domain.enum.State
 import java.util.*
 
 @Entity(
-    tableName = "parkingEntity",
+    tableName = "placeEntity",
     indices = [ Index( value = ["vehi_id"], unique = true)]
 )
-data class ParkingEntity(
+data class PlaceEntity(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "park_id")
+    @ColumnInfo(name = "plac_id")
     val id: Long = 0L,
 
-    @ColumnInfo(name = "park_in_date")
-    val inDate: Date = Date(),
+    @ColumnInfo(name = "plac_busy_date")
+    val busyDate: Date = Date(),
 
-    @ColumnInfo(name = "park_out_date")
-    val outDate: Date = Date(),
+    @ColumnInfo(name = "plac_free_date")
+    val freeDate: Date = Date(),
 
-    @ColumnInfo(name = "park_state")
-    val state: State = State.IN,
+    @ColumnInfo(name = "plac_state")
+    val state: State = State.BUSY,
 
     @ColumnInfo(name = "vehi_id")
     val vehicleId: Long = 0L

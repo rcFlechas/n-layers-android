@@ -3,9 +3,9 @@ package com.example.database.entities
 import androidx.room.Embedded
 import androidx.room.Relation
 
-data class ParkingWithVehicleEntity(
+data class PlaceWithVehicleEntity(
 
-    @Embedded val parkingEntity: ParkingEntity,
+    @Embedded val placeEntity: PlaceEntity,
     @Relation(
         parentColumn = "vehi_id",
         entityColumn = "vehi_id"

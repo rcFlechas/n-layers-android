@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val databaseModule = module {
     single { Room.databaseBuilder(get(), DataBase::class.java, "database_parking").build() }
-    single { get<DataBase>().parkingDAO() }
+    single { get<DataBase>().placeDAO() }
     single { get<DataBase>().vehicleDAO() }
 }

@@ -5,7 +5,7 @@ import com.example.domain.repositories.VehicleRepository
 
 class VehicleService (private val vehicleRepository: VehicleRepository) {
 
-    fun getAll(): List<Vehicle> = vehicleRepository.getAll()
-    fun getById(id: Long) : Vehicle = vehicleRepository.getById(id)
-    fun save(vehicle: Vehicle): Boolean = vehicleRepository.save(vehicle)
+    fun getVehiclesAll(): List<Vehicle> = vehicleRepository.getVehiclesAll()
+    fun getVehicleById(id: Long) : Vehicle = vehicleRepository.getVehicleById(id)
+    fun saveVehicle(vehicle: Vehicle): Boolean = vehicleRepository.saveVehicle(vehicle)
 }

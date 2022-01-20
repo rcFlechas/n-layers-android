@@ -14,24 +14,24 @@ class FakePlaceRepository: PlaceRepository {
         }
     }
 
-    override fun getAll(): List<Place> {
+    override fun getPlacesAll(): List<Place> {
         return placesServiceData.values.toList()
     }
 
-    override fun getAllByState(state: State): List<Place> {
+    override fun getPlacesAllByState(state: State): List<Place> {
         return placesServiceData.values.toList().filter { it.state == state }
     }
 
-    override fun getById(id: Long): Place {
+    override fun getPlaceById(id: Long): Place {
         return placesServiceData.values.toList().find { it.id == id }!!
     }
 
-    override fun save(place: Place): Boolean {
+    override fun savePlace(place: Place): Boolean {
         placesServiceData[place.id] = place
         return placesServiceData.values.toList().any { it.id == place.id }
     }
 
-    override fun update(place: Place): Boolean {
+    override fun updatePlace(place: Place): Boolean {
         placesServiceData[place.id] = place
         return placesServiceData.values.toList().any { it.id == place.id }
     }

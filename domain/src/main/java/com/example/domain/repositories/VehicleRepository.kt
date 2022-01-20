@@ -5,7 +5,7 @@ import com.example.domain.entities.Vehicle
 
 interface VehicleRepository {
 
-    fun getAll(): List<Vehicle>
-    fun getById(id: Long) : Vehicle
-    fun save(vehicle: Vehicle): Boolean
+    fun getVehiclesAll(): List<Vehicle>
+    fun getVehicleById(id: Long) : Vehicle
+    fun saveVehicle(vehicle: Vehicle): Boolean
 }
