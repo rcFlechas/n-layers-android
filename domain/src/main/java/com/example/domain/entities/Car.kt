@@ -1,6 +1,6 @@
 package com.example.domain.entities
 
 data class Car(
-    override val id: Long,
-    override val register: String
-) : Vehicle()
+    override var id: Long,
+    override var register: String
+) : Vehicle(id, register)

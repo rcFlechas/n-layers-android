@@ -1,31 +1,27 @@
 package com.example.domain.agregates
 
-import com.example.common.extensions.differenceInDaysWithHours
-import com.example.common.extensions.differenceInHours
 import com.example.domain.entities.Car
 import com.example.domain.entities.MotorCycle
 import com.example.domain.entities.Vehicle
 import com.example.domain.enum.State
+import com.example.domain.valueobjects.TimeBusy
 import java.math.BigDecimal
 import java.util.*
 
-data class Parking(
+data class Place(
     val id: Long,
     val vehicle: Vehicle,
-    val inDate: Date,
-    val outDate: Date,
-    val state: State
+    val timeBusy: TimeBusy,
+    var state: State
 ) {
 
+    fun isStateIn(): Boolean = (state == State.IN)
+
     fun isValidEntryByRegister(): Boolean {
-
-        val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val character = vehicle.register[0]
-
         return when {
             (character != FIRST_REGISTER_LETTER) -> true
-            (character == FIRST_REGISTER_LETTER &&
-                    (currentDay == Calendar.SUNDAY || currentDay == Calendar.MONDAY)) -> true
+            (character == FIRST_REGISTER_LETTER && isValidDay()) -> true
             else -> false
         }
     }
@@ -41,17 +37,17 @@ data class Parking(
 
     private fun calculateTotalPayByCar(): BigDecimal {
 
-        val diffHours = inDate.differenceInHours(outDate)
-        val diffDaysWithHours = inDate.differenceInDaysWithHours(outDate)
+        val hoursTimeBusy = timeBusy.hours
+        val daysWithHoursTimeBusy = timeBusy.daysWithHours
         val total = when {
-            (vehicle is Car && diffHours < NINE_HOURS) -> {
-                COST_BY_HOUR_CAR * diffHours
+            (vehicle is Car && hoursTimeBusy < NINE_HOURS) -> {
+                COST_BY_HOUR_CAR * hoursTimeBusy
             }
-            (vehicle is Car && diffHours in NINE_HOURS..TWENTY_FOUR_HOURS) -> {
+            (vehicle is Car && hoursTimeBusy in NINE_HOURS..TWENTY_FOUR_HOURS) -> {
                 COST_BY_DAY_CAR.toDouble()
             }
-            (vehicle is Car && diffHours > TWENTY_FOUR_HOURS) -> {
-                (COST_BY_DAY_CAR.toDouble() * diffDaysWithHours.first) + (COST_BY_HOUR_CAR * diffDaysWithHours.second)
+            (vehicle is Car && hoursTimeBusy > TWENTY_FOUR_HOURS) -> {
+                (COST_BY_DAY_CAR.toDouble() * daysWithHoursTimeBusy.first) + (COST_BY_HOUR_CAR * daysWithHoursTimeBusy.second)
             }
             else -> 0.0
         }
@@ -60,17 +56,17 @@ data class Parking(
 
     private fun calculateTotalPayByMotorCycle(): BigDecimal {
 
-        val diffHours = inDate.differenceInHours(outDate)
-        val diffDaysWithHours = inDate.differenceInDaysWithHours(outDate)
+        val hoursTimeBusy = timeBusy.hours
+        val daysWithHoursTimeBusy = timeBusy.daysWithHours
         var total = when {
-            (vehicle is MotorCycle && diffHours < NINE_HOURS) -> {
-                COST_BY_HOUR_MOTORCYCLE * diffHours
+            (vehicle is MotorCycle && hoursTimeBusy < NINE_HOURS) -> {
+                COST_BY_HOUR_MOTORCYCLE * hoursTimeBusy
             }
-            (vehicle is MotorCycle && diffHours in NINE_HOURS..TWENTY_FOUR_HOURS) -> {
+            (vehicle is MotorCycle && hoursTimeBusy in NINE_HOURS..TWENTY_FOUR_HOURS) -> {
                 COST_BY_DAY_MOTORCYCLE.toDouble()
             }
-            (vehicle is MotorCycle && diffHours > TWENTY_FOUR_HOURS) -> {
-                (COST_BY_DAY_MOTORCYCLE.toDouble() * diffDaysWithHours.first) + (COST_BY_HOUR_MOTORCYCLE * diffDaysWithHours.second)
+            (vehicle is MotorCycle && hoursTimeBusy > TWENTY_FOUR_HOURS) -> {
+                (COST_BY_DAY_MOTORCYCLE.toDouble() * daysWithHoursTimeBusy.first) + (COST_BY_HOUR_MOTORCYCLE * daysWithHoursTimeBusy.second)
             }
             else -> 0.0
         }
@@ -78,6 +74,11 @@ data class Parking(
         if (motorCycle.cylinderCapacity > CYLINDER_CAPACITY) total+= COST_PLUS_BY_CYLINDER_CAPACITY
 
         return BigDecimal(total)
+    }
+
+    private fun isValidDay(): Boolean {
+        val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        return currentDay == Calendar.SUNDAY || currentDay == Calendar.MONDAY
     }
 
     companion object {

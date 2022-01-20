@@ -1,7 +1,7 @@
 package com.example.domain.entities
 
-data class MotorCycle(
-    override val id: Long,
-    override val register: String,
+class MotorCycle(
+    override var id: Long,
+    override var register: String,
     val cylinderCapacity: Int
-) : Vehicle()
+) : Vehicle(id, register)
