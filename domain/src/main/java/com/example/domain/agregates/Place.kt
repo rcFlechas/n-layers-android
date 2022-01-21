@@ -6,12 +6,13 @@ import com.example.domain.valueobjects.TimeBusy
 import java.math.BigDecimal
 import java.util.*
 
-abstract class Place {
+abstract class Place(
+    open val id: Long,
+    open val vehicle: Vehicle,
+    open val timeBusy: TimeBusy,
+    open var state: State,
+) {
 
-    abstract val id: Long
-    abstract val vehicle: Vehicle
-    abstract val timeBusy: TimeBusy
-    abstract var state: State
     abstract val totalPay: String
 
     fun isStateBusy(): Boolean = (state == State.BUSY)

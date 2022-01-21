@@ -5,47 +5,47 @@ import com.example.domain.enum.State
 import com.example.domain.valueobjects.TimeBusy
 import java.util.*
 
-class PlaceCarBuilder : PlaceBuilder() {
+class PlaceCarBuilder {
 
-    override var id: Long = 1
-    override var vehicle: Vehicle = CarBuilder.aCar().build()
-    override var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
+    var id: Long = 1
+    var car: Car = CarBuilder.aCar().build()
+    var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
         .withBusyDate(Date(2022, 1, 14, 13, 30))
         .withFreeDate(Date(2022, 1, 14, 14, 0))
         .build()
-    override var state: State = State.FREE
+    var state: State = State.FREE
 
-    override fun withId(id: Long): PlaceCarBuilder {
+    fun withId(id: Long): PlaceCarBuilder {
         this.id = id
         return this
     }
 
-    override fun withVehicle(vehicle: Vehicle): PlaceCarBuilder {
-        this.vehicle = vehicle
+    fun withVehicle(car: Car): PlaceCarBuilder {
+        this.car = car
         return this
     }
 
-    override fun withTimeBusy(timeBusy: TimeBusy): PlaceCarBuilder {
+    fun withTimeBusy(timeBusy: TimeBusy): PlaceCarBuilder {
         this.timeBusy = timeBusy
         return this
     }
 
-    override fun withState(state: State): PlaceCarBuilder {
+    fun withState(state: State): PlaceCarBuilder {
         this.state = state
         return this
     }
 
-    override fun with(vehicleBuilder: VehicleBuilder): PlaceCarBuilder {
-        this.vehicle = vehicleBuilder.build()
+    fun with(carBuilder: CarBuilder): PlaceCarBuilder {
+        this.car = carBuilder.build()
         return this
     }
 
-    override fun with(timeBusyBuilder: TimeBusyBuilder): PlaceCarBuilder {
+    fun with(timeBusyBuilder: TimeBusyBuilder): PlaceCarBuilder {
         this.timeBusy = timeBusyBuilder.build()
         return this
     }
 
-    override fun build() = PlaceCar(id, vehicle, timeBusy, state)
+    fun build() = PlaceCar(id, car, timeBusy, state)
 
     companion object {
         fun aPlaceCar() = PlaceCarBuilder()

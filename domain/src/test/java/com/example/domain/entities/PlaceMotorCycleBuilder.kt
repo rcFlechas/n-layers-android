@@ -6,47 +6,47 @@ import com.example.domain.enum.State
 import com.example.domain.valueobjects.TimeBusy
 import java.util.*
 
-class PlaceMotorCycleBuilder : PlaceBuilder() {
+class PlaceMotorCycleBuilder {
 
-    override var id: Long = 1
-    override var vehicle: Vehicle = aMotorCycle().build()
-    override var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
+     var id: Long = 1
+     var motorCycle: MotorCycle = aMotorCycle().build()
+     var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
         .withBusyDate(Date(2022, 1, 14, 13, 30))
         .withFreeDate(Date(2022, 1, 14, 14, 0))
         .build()
-    override var state: State = State.FREE
+     var state: State = State.FREE
 
-    override fun withId(id: Long): PlaceMotorCycleBuilder {
+     fun withId(id: Long): PlaceMotorCycleBuilder {
         this.id = id
         return this
     }
 
-    override fun withVehicle(vehicle: Vehicle): PlaceMotorCycleBuilder {
-        this.vehicle = vehicle
+     fun withVehicle(motorCycle: MotorCycle): PlaceMotorCycleBuilder {
+        this.motorCycle = motorCycle
         return this
     }
 
-    override fun withTimeBusy(timeBusy: TimeBusy): PlaceMotorCycleBuilder {
+     fun withTimeBusy(timeBusy: TimeBusy): PlaceMotorCycleBuilder {
         this.timeBusy = timeBusy
         return this
     }
 
-    override fun withState(state: State): PlaceMotorCycleBuilder {
+     fun withState(state: State): PlaceMotorCycleBuilder {
         this.state = state
         return this
     }
 
-    override fun with(vehicleBuilder: VehicleBuilder): PlaceMotorCycleBuilder {
-        this.vehicle = vehicleBuilder.build()
+     fun with(motorCycleBuilder: MotorCycleBuilder): PlaceMotorCycleBuilder {
+        this.motorCycle = motorCycleBuilder.build()
         return this
     }
 
-    override fun with(timeBusyBuilder: TimeBusyBuilder): PlaceMotorCycleBuilder {
+     fun with(timeBusyBuilder: TimeBusyBuilder): PlaceMotorCycleBuilder {
         this.timeBusy = timeBusyBuilder.build()
         return this
     }
 
-    override fun build() = PlaceMotorCycle(id, vehicle, timeBusy, state)
+     fun build() = PlaceMotorCycle(id, motorCycle, timeBusy, state)
 
     companion object {
         fun aPlaceMotorCycle() = PlaceMotorCycleBuilder()

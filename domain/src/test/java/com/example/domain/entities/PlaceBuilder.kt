@@ -6,10 +6,10 @@ import com.example.domain.valueobjects.TimeBusy
 
 abstract class PlaceBuilder {
 
-    protected abstract var id: Long
-    protected abstract var vehicle: Vehicle
-    protected abstract var timeBusy: TimeBusy
-    protected abstract var state: State
+    open  var id: Long = 0
+    open lateinit var vehicle: Vehicle
+    open lateinit var timeBusy: TimeBusy
+    open lateinit var state: State
 
     abstract fun withId(id: Long): PlaceBuilder
     abstract fun withVehicle(vehicle: Vehicle): PlaceBuilder
