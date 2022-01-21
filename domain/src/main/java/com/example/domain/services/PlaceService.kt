@@ -8,6 +8,7 @@ import com.example.domain.exceptions.EntryNotAuthorizedException
 import com.example.domain.exceptions.NotPlaceAvailableException
 import com.example.domain.exceptions.PlaceFreeException
 import com.example.domain.repositories.PlaceRepository
+import java.util.*
 
 class PlaceService (private val placeRepository: PlaceRepository) {
 
@@ -30,6 +31,7 @@ class PlaceService (private val placeRepository: PlaceRepository) {
             throw PlaceFreeException()
         }
         place.state = State.FREE
+        place.timeBusy.freeDate = Date()
         return placeRepository.updatePlace(place)
     }
 
@@ -54,8 +56,8 @@ class PlaceService (private val placeRepository: PlaceRepository) {
     }
 
     companion object {
-        private const val MAX_CARS = 20
-        private const val MAX_MOTORCYCLE = 10
+        const val MAX_CARS = 20
+        const val MAX_MOTORCYCLE = 10
     }
 }
 

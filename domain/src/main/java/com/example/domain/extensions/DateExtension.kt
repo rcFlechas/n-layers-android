@@ -1,4 +1,4 @@
-package com.example.common.extensions
+package com.example.domain.extensions
 
 import java.util.*
 import kotlin.math.abs

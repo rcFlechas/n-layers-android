@@ -1,12 +1,11 @@
 package com.example.domain.valueobjects
 
-import com.example.common.extensions.differenceInDaysWithHours
-import com.example.common.extensions.differenceInHours
+import com.example.domain.extensions.differenceInDaysWithHours
 import java.util.*
 
 class TimeBusy(
     private val busyDate: Date,
-    private val freeDate: Date,
+    var freeDate: Date,
 ) {
 
     /*val days = daysWithHours.first
