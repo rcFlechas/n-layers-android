@@ -13,7 +13,7 @@ class PlaceService (private val placeRepository: PlaceRepository) {
 
     fun entry(place: Place): Boolean {
 
-        if (!place.isOauthEntry()) {
+        if (!place.isEnableToEntry()) {
             throw EntryNotAuthorizedException()
         }
         val listPlaces = getPlacesAllByState(State.BUSY)
@@ -25,18 +25,17 @@ class PlaceService (private val placeRepository: PlaceRepository) {
 
     fun exit(placeId: Long): Boolean {
 
-        val freePlace = placeRepository.getPlaceById(placeId)
-        if (!freePlace.isStateBusy()) {
+        val place = placeRepository.getPlaceById(placeId)
+        if (!place.isStateBusy()) {
             throw PlaceFreeException()
         }
-        freePlace.state = State.FREE
-        return placeRepository.updatePlace(freePlace)
+        place.state = State.FREE
+        return placeRepository.updatePlace(place)
     }
 
     fun getTotalPay(placeId: Long): String {
-
-        val freePlace = placeRepository.getPlaceById(placeId)
-        return freePlace.totalPay
+        val busyPlace = placeRepository.getPlaceById(placeId)
+        return busyPlace.totalPay
     }
 
     fun getPlacesAll() = placeRepository.getPlacesAll()
@@ -45,13 +44,13 @@ class PlaceService (private val placeRepository: PlaceRepository) {
 
     fun getPlaceById(placeId: Long) = placeRepository.getPlaceById(placeId)
 
-    private fun getSizeByCar(listPlace: List<Place>) = listPlace.filter { it.vehicle is Car }.size
+    private fun getPlacesSizeByCar(listPlace: List<Place>) = listPlace.filter { it.vehicle is Car }.size
 
-    private fun getSizeByMotorCycle(listPlace: List<Place>) = listPlace.filter { it.vehicle is MotorCycle }.size
+    private fun getPlacesSizeByMotorCycle(listPlace: List<Place>) = listPlace.filter { it.vehicle is MotorCycle }.size
 
     private fun thereArePlacesAvailable(listPlace: List<Place>, place: Place): Boolean {
-        return  (place.vehicle is Car && getSizeByCar(listPlace) < MAX_CARS) ||
-                (place.vehicle is MotorCycle && getSizeByMotorCycle(listPlace) < MAX_MOTORCYCLE)
+        return  (place.vehicle is Car && getPlacesSizeByCar(listPlace) < MAX_CARS) ||
+                (place.vehicle is MotorCycle && getPlacesSizeByMotorCycle(listPlace) < MAX_MOTORCYCLE)
     }
 
     companion object {

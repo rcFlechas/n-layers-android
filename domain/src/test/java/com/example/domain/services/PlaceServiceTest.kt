@@ -1,7 +1,7 @@
 package com.example.domain.services
 
 import com.example.domain.entities.CarBuilder.Companion.aCar
-import com.example.domain.entities.PlaceBuilder.Companion.aPlace
+import com.example.domain.entities.PlaceCarBuilder.Companion.aPlaceCar
 import com.example.domain.entities.TimeBusyBuilder.Companion.aTimeBusy
 import com.example.domain.enum.State
 import com.example.domain.exceptions.EntryNotAuthorizedException
@@ -23,10 +23,10 @@ class PlaceServiceTest {
 
         fakePlaceRepository = FakePlaceRepository()
 
-        val place1 = aPlace()
+        val place1 = aPlaceCar()
             .build()
 
-        val place2 = aPlace()
+        val place2 = aPlaceCar()
             .withId(2)
             .with(
                 aCar()
@@ -50,7 +50,7 @@ class PlaceServiceTest {
     fun entry_isEntry_returnTrue() {
 
         //Arrange
-        val place3 = aPlace()
+        val place3 = aPlaceCar()
             .withId(3)
             .with(
                 aCar()
@@ -76,7 +76,7 @@ class PlaceServiceTest {
     fun entry_isSave_returnEntryNotAuthorizedException() {
 
         //Arrange
-        val place4 = aPlace()
+        val place4 = aPlaceCar()
             .withId(4)
             .with(
                 aCar()
