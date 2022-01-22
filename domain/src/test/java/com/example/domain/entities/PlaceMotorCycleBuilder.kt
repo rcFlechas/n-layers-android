@@ -4,15 +4,14 @@ import com.example.domain.agregates.PlaceMotorCycle
 import com.example.domain.entities.MotorCycleBuilder.Companion.aMotorCycle
 import com.example.domain.enum.State
 import com.example.domain.valueobjects.TimeBusy
-import java.util.*
 
 class PlaceMotorCycleBuilder {
 
      var id: Long = 1
      var motorCycle: MotorCycle = aMotorCycle().build()
      var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
-        .withBusyDate(Date(2022, 1, 14, 13, 30))
-        .withFreeDate(Date(2022, 1, 14, 14, 0))
+        .withBusyDate(BUSY_DATE)
+        .withFreeDate(FREE_DATE)
         .build()
      var state: State = State.FREE
 
@@ -49,6 +48,9 @@ class PlaceMotorCycleBuilder {
      fun build() = PlaceMotorCycle(id, motorCycle, timeBusy, state)
 
     companion object {
+        private const val BUSY_DATE = "2022-01-14T13:30"
+        private const val FREE_DATE = "2022-01-14T14:00"
+
         fun aPlaceMotorCycle() = PlaceMotorCycleBuilder()
     }
 }

@@ -4,7 +4,7 @@ import com.example.domain.extensions.differenceInDaysWithHours
 import java.util.*
 
 class TimeBusy(
-    private val busyDate: Date,
+    val busyDate: Date,
     var freeDate: Date,
 ) {
 
@@ -18,4 +18,8 @@ class TimeBusy(
 
     val daysWithHours : Pair<Double, Double>
         get() = busyDate.differenceInDaysWithHours(freeDate)
+
+    companion object {
+        const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm"
+    }
 }

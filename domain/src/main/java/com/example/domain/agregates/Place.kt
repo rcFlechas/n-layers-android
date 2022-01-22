@@ -1,7 +1,9 @@
 package com.example.domain.agregates
 
 import com.example.domain.entities.Vehicle
+import com.example.domain.enum.DayOfWeek
 import com.example.domain.enum.State
+import com.example.domain.extensions.dayOfWeek
 import com.example.domain.valueobjects.TimeBusy
 import java.math.BigDecimal
 import java.util.*
@@ -27,18 +29,18 @@ abstract class Place(
     }
 
     private fun isValidDay(): Boolean {
-        val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        return currentDay == Calendar.SUNDAY || currentDay == Calendar.MONDAY
+        val currentDay = timeBusy.busyDate.dayOfWeek()
+        return currentDay == DayOfWeek.SUNDAY || currentDay == DayOfWeek.MONDAY
     }
 
     open fun calculateTotalPay(costByHour: Int, costByDay: Int): BigDecimal {
 
-        var days = timeBusy.daysWithHours.first
-        var hours = timeBusy.daysWithHours.second
+        var days = timeBusy.daysWithHours.first.toInt()
+        var hours = timeBusy.daysWithHours.second.toInt()
 
         if (hours >= NINE_HOURS) {
             days++
-            hours= 0.0
+            hours= 0
         }
 
         val total = (costByDay.toDouble() * days) + (costByHour.toDouble() * hours)
@@ -47,6 +49,6 @@ abstract class Place(
 
     companion object {
         private const val FIRST_REGISTER_LETTER = 'A'
-        private const val NINE_HOURS = 9.0
+        private const val NINE_HOURS = 9
     }
 }

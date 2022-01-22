@@ -16,7 +16,6 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class PlaceServiceTest {
 
@@ -41,8 +40,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 14, 30))
-                    .withFreeDate(Date(2022, 1, 14, 14, 30))
+                    .withBusyDate("2022-01-14T14:30")
+                    .withFreeDate("2022-01-14T14:30")
             )
             .withState(State.BUSY)
             .build()
@@ -65,8 +64,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -92,8 +91,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -119,8 +118,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -146,8 +145,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -172,8 +171,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -186,7 +185,7 @@ class PlaceServiceTest {
     }
 
     @Test
-    fun entry_isEntry_returnEntryNotAuthorizedException() { //TODO revisar prueba
+    fun entry_isEnableToEntry_returnEntryNotAuthorizedException() {
 
         //Arrange
         val place3 = aPlaceCar()
@@ -198,8 +197,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -233,8 +232,8 @@ class PlaceServiceTest {
                 )
                 .with(
                     aTimeBusy()
-                        .withBusyDate(Date(2022, 1, 14, 15, 30))
-                        .withFreeDate(Date(2022, 1, 14, 15, 30))
+                        .withBusyDate("2022-01-14T15:30")
+                        .withFreeDate("2022-01-14T15:30")
                 )
                 .withState(State.BUSY)
                 .build()
@@ -252,8 +251,8 @@ class PlaceServiceTest {
                 )
                 .with(
                     aTimeBusy()
-                        .withBusyDate(Date(2022, 1, 14, 15, 30))
-                        .withFreeDate(Date(2022, 1, 14, 15, 30))
+                        .withBusyDate("2022-01-14T15:30")
+                        .withFreeDate("2022-01-14T15:30")
                 )
                 .withState(State.BUSY)
                 .build()
@@ -269,8 +268,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -284,8 +283,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -328,8 +327,8 @@ class PlaceServiceTest {
                 )
                 .with(
                     aTimeBusy()
-                        .withBusyDate(Date(2022, 1, 14, 15, 30))
-                        .withFreeDate(Date(2022, 1, 14, 15, 30))
+                        .withBusyDate("2022-01-14T15:30")
+                        .withFreeDate("2022-01-14T15:30")
                 )
                 .withState(State.BUSY)
                 .build()
@@ -347,8 +346,8 @@ class PlaceServiceTest {
                 )
                 .with(
                     aTimeBusy()
-                        .withBusyDate(Date(2022, 1, 14, 15, 30))
-                        .withFreeDate(Date(2022, 1, 14, 15, 30))
+                        .withBusyDate("2022-01-14T15:30")
+                        .withFreeDate("2022-01-14T15:30")
                 )
                 .withState(State.BUSY)
                 .build()
@@ -364,8 +363,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -379,8 +378,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -419,8 +418,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -447,8 +446,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -474,8 +473,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -506,8 +505,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.BUSY)
             .build()
@@ -537,8 +536,8 @@ class PlaceServiceTest {
             )
             .with(
                 aTimeBusy()
-                    .withBusyDate(Date(2022, 1, 14, 15, 30))
-                    .withFreeDate(Date(2022, 1, 14, 15, 30))
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T15:30")
             )
             .withState(State.FREE)
             .build()
@@ -554,5 +553,168 @@ class PlaceServiceTest {
 
         //Assert
         assertThat(isPlaceFreeException, `is`(true))
+    }
+
+    @Test
+    fun getTotalPay_totalTwoHoursByCar_returnString2000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceCar()
+            .withId(placeId)
+            .with(
+                aCar()
+                    .withId(3)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T17:30")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByCar = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByCar, `is`("2000"))
+    }
+
+    @Test
+    fun getTotalPay_totalTwoDaysByCar_returnString16000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceCar()
+            .withId(placeId)
+            .with(
+                aCar()
+                    .withId(3)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-16T15:30")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByCar = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByCar, `is`("16000"))
+    }
+
+    @Test
+    fun getTotalPay_totalTwoDaysAndTwoHoursByCar_returnString18000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceCar()
+            .withId(placeId)
+            .with(
+                aCar()
+                    .withId(3)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-16T17:30")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByCar = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByCar, `is`("18000"))
+    }
+
+    @Test
+    fun getTotalPay_totalTwoDaysAndElevenHoursByCar_returnString24000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceCar()
+            .withId(placeId)
+            .with(
+                aCar()
+                    .withId(3)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-17T02:30")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByCar = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByCar, `is`("24000"))
+    }
+
+    @Test
+    fun getTotalPay_totalTwoHoursByMotorCycle_returnString1000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceMotorCycle()
+            .withId(placeId)
+            .with(
+                aMotorCycle()
+                    .withId(3)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-14T17:30")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByMotorCycle = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByMotorCycle, `is`("1000"))
+    }
+
+    @Test
+    fun getTotalPay_totalTwoDaysAndTwoHoursAndCylinder600ByMotorCycle_returnString11000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceMotorCycle()
+            .withId(placeId)
+            .with(
+                aMotorCycle()
+                    .withId(3)
+                    .withRegister("DDD")
+                    .withCylinderCapacity(600)
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-14T15:30")
+                    .withFreeDate("2022-01-16T17:30")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByMotorCycle = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByMotorCycle, `is`("11000"))
     }
 }

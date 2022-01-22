@@ -17,9 +17,9 @@ class PlaceMotorCycle(
 
     override fun calculateTotalPay(costByHour: Int, costByDay: Int): BigDecimal {
 
-        val total = super.calculateTotalPay(costByHour, costByDay)
+        var total = super.calculateTotalPay(costByHour, costByDay)
         if (isMaxCylinderCapacity()) {
-            total.add(COST_PLUS_BY_CYLINDER_CAPACITY.toBigDecimal())
+            total = total.add(COST_PLUS_BY_CYLINDER_CAPACITY.toBigDecimal())
         }
         return total
     }
