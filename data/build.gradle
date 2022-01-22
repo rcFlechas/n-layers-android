@@ -1,0 +1,9 @@
+apply from: "$rootDir/common-kotlin-library.gradle"
+
+dependencies {
+    implementation project(":domain")
+
+    // Koin
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+}
