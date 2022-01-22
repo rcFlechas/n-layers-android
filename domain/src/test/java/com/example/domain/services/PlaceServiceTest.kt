@@ -109,8 +109,9 @@ class PlaceServiceTest {
     fun getPlaceById_placeId_returnThree() {
 
         //Arrange
+        val placeId = 3L
         val place3 = aPlaceCar()
-            .withId(3)
+            .withId(placeId)
             .with(
                 aCar()
                     .withId(3)
@@ -126,10 +127,10 @@ class PlaceServiceTest {
         fakePlaceRepository.addPlaces(place3)
 
         //Act
-        val placeId = placeService.getPlaceById(3).id
+        val resultPlaceId = placeService.getPlaceById(placeId).id
 
         //Assert
-        assertThat(placeId, `is`(3))
+        assertThat(resultPlaceId, `is`(placeId))
     }
 
     @Test
