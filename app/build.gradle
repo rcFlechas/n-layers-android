@@ -4,9 +4,17 @@ plugins {
     id 'jacoco'
 }
 
-task jacocoTestReport (type: JacocoReport, dependsOn: ['testDebugUnitTest','connectedAndroidTest']){
+task jacocoTestReport (
+        type: JacocoReport,
+        dependsOn: [
+                'testDebugUnitTest',
+                'connectedAndroidTest',
+                ':domain:test',
+                ':data:test',
+                ':database:test'
+        ]
+){
 
-    def appModule = project(':app')
     def directoriesToCoverage = layout.files("$buildDir/tmp/kotlin-classes/debug")
     def mainSources = layout.files("$project.projectDir/src/main/java")
 

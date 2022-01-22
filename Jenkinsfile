@@ -21,9 +21,9 @@ pipeline {
                 sh './gradlew build -x test'
             }
         }
-        stage('Unit Tests') {
+        stage('Tests') {
             steps {
-                echo "------------>Unit Tests<------------"
+                echo "------------>Tests<------------"
                 sh './gradlew clean'
                 sh './gradlew jacocoTestReport'
             }
