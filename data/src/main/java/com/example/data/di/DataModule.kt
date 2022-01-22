@@ -7,6 +7,6 @@ import com.example.domain.repositories.VehicleRepository
 import org.koin.dsl.module
 
 val dataModule = module {
-    single<PlaceRepository> { PlaceRepositoryImpl( localPlaceDataSource = get()) }
-    single<VehicleRepository> { VehicleRepositoryImpl(localVehicleDataSource = get()) }
+    single<PlaceRepository> { PlaceRepositoryImpl( placeLocalDataSource = get()) }
+    single<VehicleRepository> { VehicleRepositoryImpl(vehicleLocalDataSource = get()) }
 }

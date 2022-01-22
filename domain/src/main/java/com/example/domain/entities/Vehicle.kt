@@ -31,7 +31,6 @@ open class Vehicle(open var id: Long, register: String) {
 
     companion object {
         private const val CHARACTER_REGISTER_REGEX = "^$|^[a-zA-Z0-9]+$"
-//        private const val CHARACTER_REGISTER_REGEX = "[a-zA-Z]+"
         private const val LENGTH_REGISTER_REGEX = 3
     }
 }

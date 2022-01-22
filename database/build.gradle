@@ -2,6 +2,7 @@ apply from: "$rootDir/common-android-library.gradle"
 
 dependencies {
 
+    implementation project(":data")
     implementation project(":domain")
 
     // Room
