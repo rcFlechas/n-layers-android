@@ -7,7 +7,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ADNCeiba"
-include ':app'
+include ':presentation'
 include ':domain'
 include ':database'
 include ':data'
