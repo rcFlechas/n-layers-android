@@ -16,8 +16,13 @@ task jacocoTestReport (
         ]
 ){
 
-    def directoriesToCoverage = layout.files("$buildDir/tmp/kotlin-classes/debug")
-    def mainSources = layout.files("$project.projectDir/src/main/java")
+    def domain = project(":domain")
+    def domainClasses = layout.files("$domain.buildDir/classes/kotlin/main")
+    def domainSources = layout.files("$domain.projectDir/src/main/java")
+    def domainExecutionFiles = layout.files("$domain.buildDir/jacoco/test.exec")
+
+    def directoriesToCoverage = layout.files("$buildDir/tmp/kotlin-classes/debug", domainClasses)
+    def mainSources = layout.files("$project.projectDir/src/main/java", domainSources)
 
     def executionFilesFromConnectedAndroidTest = fileTree(
             dir: "$buildDir",
@@ -27,7 +32,8 @@ task jacocoTestReport (
 
     def executionFiles = layout.files(
             executionFilesFromConnectedAndroidTest,
-            executionFileForUnitTestInModule
+            executionFileForUnitTestInModule,
+            domainExecutionFiles
     )
 
     sourceDirectories.setFrom(files([mainSources]))
