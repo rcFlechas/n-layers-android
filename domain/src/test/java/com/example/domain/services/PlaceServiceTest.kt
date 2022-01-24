@@ -106,7 +106,7 @@ class PlaceServiceTest {
     }
 
     @Test
-    fun getPlaceById_placeId_returnThree() {
+    fun getPlaceById_placeId_returnThreeID() {
 
         //Arrange
         val placeId = 3L
