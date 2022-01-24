@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dimen_4dp"
+    android:layout_marginTop="@dimen/dimen_4dp"
+    android:layout_marginStart="@dimen/dimen_4dp"
+    android:layout_marginEnd="@dimen/dimen_4dp">
+
+    <LinearLayout
+        android:id="@+id/content_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimen_8dp"
+        android:paddingStart="@dimen/dimen_8dp"
+        android:paddingEnd="@dimen/dimen_8dp"
+        android:paddingTop="@dimen/dimen_8dp">
+
+        <RelativeLayout
+            android:id="@+id/content_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end">
+
+            <TextView
+                android:id="@+id/title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_label"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold"
+                tools:text="MOTORCYCLE" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/content_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_register"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/title_register" />
+
+            <TextView
+                android:id="@+id/description_register"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                tools:text="ATJ-89" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_cylinder_capacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_cylinder_capacity"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/title_cylinder_capacity" />
+
+            <TextView
+                android:id="@+id/description_cylinder_capacity"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                tools:text="110cc" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

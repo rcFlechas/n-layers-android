@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navPlacesBusyFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/navPlacesBusyFragment"
+        android:name="com.example.adnceiba.ui.fragments.PlacesBusyFragment"
+        android:label="fragment_places_busy"
+        tools:layout="@layout/fragment_places_busy" >
+
+<!--        <action-->
+<!--            android:id="@+id/action_placesBusyFragment_to_postFragment"-->
+<!--            app:destination="@id/postFragment" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/navVehiclesFragment"
+        android:name="com.example.adnceiba.ui.fragments.VehiclesFragment"
+        android:label="fragment_vehicles"
+        tools:layout="@layout/fragment_vehicles" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navPlacesFreeFragment"
+        android:name="com.example.adnceiba.ui.fragments.PlacesFreeFragment"
+        android:label="fragment_places_free"
+        tools:layout="@layout/fragment_places_free" >
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_placesBusyFragment_to_postFragment"-->
+        <!--            app:destination="@id/postFragment" />-->
+    </fragment>
+</navigation>

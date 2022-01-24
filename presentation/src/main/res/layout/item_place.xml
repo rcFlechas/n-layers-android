@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dimen_4dp"
+    android:layout_marginTop="@dimen/dimen_4dp"
+    android:layout_marginStart="@dimen/dimen_4dp"
+    android:layout_marginEnd="@dimen/dimen_4dp">
+
+    <LinearLayout
+        android:id="@+id/content_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimen_8dp"
+        android:paddingStart="@dimen/dimen_8dp"
+        android:paddingEnd="@dimen/dimen_8dp"
+        android:paddingTop="@dimen/dimen_8dp">
+
+        <RelativeLayout
+            android:id="@+id/content_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end">
+
+            <TextView
+                android:id="@+id/title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_label"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold"
+                tools:text="FREE" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/content_vehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_vehicle"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/title_vehicle" />
+
+            <TextView
+                android:id="@+id/description_vehicle"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                tools:text="ATJ-89" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_type"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/title_type" />
+
+            <TextView
+                android:id="@+id/description_type"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                tools:text="MotorCycle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_date_busy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_date_busy"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/title_date_busy" />
+
+            <TextView
+                android:id="@+id/description_date_busy"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                tools:text="14/01/2022 15:30" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_date_free"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_date_free"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/title_date_free" />
+
+            <TextView
+                android:id="@+id/description_date_free"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                tools:text="14/01/2022 16:21" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_total_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_total_pay"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/title_total_pay" />
+
+            <TextView
+                android:id="@+id/description_total_pay"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                tools:text="4.000 COP" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
