@@ -10,8 +10,15 @@
 
     <string name="message_list_empty">List is empty</string>
     <string name="title_register">Register:</string>
+    <string name="title_add_register">Register</string>
     <string name="title_cylinder_capacity">Cylinder Capacity:</string>
+    <string name="title_add_cylinder_capacity">Cylinder Capacity</string>
     <string name="title_nav_places_busy">Places Busy</string>
     <string name="title_nav_vehicles">Vehicles</string>
     <string name="title_nav_places_free">Places Free</string>
+    <string name="description_fab_add_vehicle">TODO</string>
+    <string name="title_add_type_vehicle">Type</string>
+    <string name="title_add_type_vehicle_car">CAR</string>
+    <string name="title_add_type_vehicle_motorcycle">MOTORCYCLE</string>
+    <string name="title_save_vehicle">SAVE</string>
 </resources>
