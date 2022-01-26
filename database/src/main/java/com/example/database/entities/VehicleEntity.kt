@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import com.example.database.enum.TypeVehicle
 
 @Entity(
-    tableName = "vehicleEntity",
+    tableName = "vehicle",
     indices = [ Index( value = ["vehi_register"], unique = true)]
 )
 data class VehicleEntity(

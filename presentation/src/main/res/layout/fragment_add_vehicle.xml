@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title_add_register_text_view"
+                android:id="@+id/add_register_text_view"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:text="@string/title_add_register" />
 
             <EditText
-                android:id="@+id/title_add_register_edit_text"
+                android:id="@+id/add_register_edit_text"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_36dp"
@@ -52,7 +52,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title_add_type_text_view"
+                android:id="@+id/add_type_text_view"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title_add_cylinder_capacity_text_view"
+                android:id="@+id/add_cylinder_capacity_text_view"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 android:text="@string/title_add_cylinder_capacity" />
 
             <EditText
-                android:id="@+id/title_add_cylinder_capacity_edit_text"
+                android:id="@+id/add_cylinder_capacity_edit_text"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_36dp"
@@ -118,6 +118,12 @@
                 tools:text="ATJ-89" />
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

@@ -16,7 +16,8 @@ import com.example.database.entities.VehicleEntity
         PlaceEntity::class,
         VehicleEntity::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(
     DateConverter::class,

@@ -8,7 +8,7 @@ import com.example.domain.enum.State
 import java.util.*
 
 @Entity(
-    tableName = "placeEntity",
+    tableName = "place",
     indices = [ Index( value = ["vehi_id"], unique = true)]
 )
 data class PlaceEntity(

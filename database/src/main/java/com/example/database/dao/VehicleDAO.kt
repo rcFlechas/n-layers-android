@@ -6,11 +6,10 @@ import com.example.database.entities.VehicleEntity
 @Dao
 interface VehicleDAO {
 
-    @Transaction
-    @Query("SELECT * FROM vehicleEntity")
+    @Query("SELECT * FROM vehicle")
     fun getVehiclesAll(): List<VehicleEntity>
 
-    @Query("SELECT * FROM vehicleEntity WHERE vehi_id = :id")
+    @Query("SELECT * FROM vehicle WHERE vehi_id = :id")
     fun getVehicleById(id: Long) : VehicleEntity
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

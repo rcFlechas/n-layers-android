@@ -10,19 +10,20 @@ import java.util.*
 interface PlaceDAO {
 
     @Transaction
-    @Query("SELECT * FROM placeEntity")
+    @Query("SELECT * FROM place")
     fun getPlacesAll(): List<PlaceWithVehicleEntity>
 
     @Transaction
-    @Query("SELECT * FROM placeEntity WHERE plac_state =:state")
+    @Query("SELECT * FROM place WHERE plac_state =:state")
     fun getPlacesAllByState(state: State): List<PlaceWithVehicleEntity>
 
-    @Query("SELECT * FROM placeEntity WHERE plac_id = :id")
+    @Transaction
+    @Query("SELECT * FROM place WHERE plac_id = :id")
     fun getPlaceById(id: Long) : PlaceWithVehicleEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun savePlace(place: PlaceEntity): Boolean
 
-    @Query("UPDATE placeEntity SET plac_free_date =:freeDate, plac_state =:state WHERE plac_id =:id")
+    @Query("UPDATE place SET plac_free_date =:freeDate, plac_state =:state WHERE plac_id =:id")
     fun updatePlace(id: Long, freeDate: Date, state: State): Boolean
 }
