@@ -116,6 +116,14 @@ dependencies {
 
     testImplementation "junit:junit:$junit_version"
 
+    // AndroidX Test - Instrumented testing
     androidTestImplementation "androidx.test.ext:junit:$android_test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "junit:junit:$junit_version"
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+    debugImplementation "androidx.test:core:$android_test_core_version"
 }
