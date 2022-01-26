@@ -24,7 +24,7 @@ data class PlaceEntity(
     var freeDate: Date = Date(),
 
     @ColumnInfo(name = "plac_state")
-    var state: State = State.BUSY,
+    var state: String = State.BUSY.name,
 
     @ColumnInfo(name = "vehi_id")
     var vehicleId: Long = 0L

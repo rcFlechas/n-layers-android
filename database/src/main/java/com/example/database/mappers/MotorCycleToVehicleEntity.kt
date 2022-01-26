@@ -8,6 +8,6 @@ import com.example.domain.mappers.Mapper
 class MotorCycleToVehicleEntity : Mapper<MotorCycle, VehicleEntity> {
 
     override fun map(input: MotorCycle): VehicleEntity = with(input) {
-        VehicleEntity(id, register, cylinderCapacity, TypeVehicle.MOTORCYCLE)
+        VehicleEntity(id, register, cylinderCapacity, TypeVehicle.MOTORCYCLE.name)
     }
 }

@@ -9,7 +9,7 @@ class VehicleEntityToVehicle : Mapper<VehicleEntity, Vehicle> {
 
     override fun map(input: VehicleEntity): Vehicle  {
 
-        return when(input.typeVehicle) {
+        return when(TypeVehicle.valueOf(input.typeVehicle)) {
             TypeVehicle.MOTORCYCLE -> {
                 VehicleEntityToMotorCycle().map(input)
             }

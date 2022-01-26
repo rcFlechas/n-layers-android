@@ -7,6 +7,7 @@ import com.example.domain.agregates.PlaceCar
 import com.example.domain.agregates.PlaceMotorCycle
 import com.example.domain.entities.Car
 import com.example.domain.entities.MotorCycle
+import com.example.domain.enum.State
 import com.example.domain.mappers.Mapper
 import com.example.domain.valueobjects.TimeBusy
 
@@ -14,7 +15,7 @@ class PlaceEntityToPlace : Mapper<PlaceWithVehicleEntity, Place> {
 
     override fun map(input: PlaceWithVehicleEntity): Place = with(input) {
 
-        when (vehicleEntity.typeVehicle) {
+        when (TypeVehicle.valueOf(vehicleEntity.typeVehicle)) {
 
             TypeVehicle.MOTORCYCLE -> {
                 PlaceMotorCycle(
@@ -28,7 +29,7 @@ class PlaceEntityToPlace : Mapper<PlaceWithVehicleEntity, Place> {
                         busyDate = placeEntity.busyDate,
                         freeDate = placeEntity.freeDate
                     ),
-                    state = placeEntity.state
+                    state = State.valueOf(placeEntity.state)
                 )
             }
             else -> {
@@ -42,7 +43,7 @@ class PlaceEntityToPlace : Mapper<PlaceWithVehicleEntity, Place> {
                         busyDate = placeEntity.busyDate,
                         freeDate = placeEntity.freeDate
                     ),
-                    state = placeEntity.state
+                    state = State.valueOf(placeEntity.state)
                 )
             }
         }

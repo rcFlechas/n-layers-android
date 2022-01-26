@@ -11,7 +11,7 @@ class PlaceToPlaceEntity : Mapper<Place, PlaceEntity> {
             id = id,
             busyDate = timeBusy.busyDate,
             freeDate = timeBusy.freeDate,
-            state = state,
+            state = state.name,
             vehicleId = vehicle.id
         )
     }

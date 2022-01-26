@@ -23,5 +23,5 @@ data class VehicleEntity(
     var cylinderCapacity: Int? = null,
 
     @ColumnInfo(name = "vehi_type")
-    var typeVehicle: TypeVehicle = TypeVehicle.CAR
+    var typeVehicle: String = TypeVehicle.CAR.name
 )
