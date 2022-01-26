@@ -52,7 +52,7 @@ class VehicleAdapter(
             binding.descriptionRegister.text = item.register
             binding.titleLabel.text = item.label
             if (item is MotorCycleBind) {
-                binding.descriptionCylinderCapacity.visibility = View.VISIBLE
+                binding.contentCylinderCapacity.visibility = View.VISIBLE
                 binding.descriptionCylinderCapacity.text = item.cylinderCapacity.toString()
             }
         }

@@ -94,11 +94,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/content_cylinder_capacity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_4dp"
             android:layout_marginBottom="@dimen/dimen_4dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/add_cylinder_capacity_text_view"

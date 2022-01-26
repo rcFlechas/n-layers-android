@@ -1,10 +1,10 @@
 package com.example.adnceiba.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.adnceiba.R
 import com.example.adnceiba.binds.CarBind
 import com.example.adnceiba.binds.MotorCycleBind
@@ -60,6 +60,17 @@ class AddVehicleFragment : Fragment() {
 
         binding?.saveVehicleButton?.setOnClickListener {
             addVehicleViewModel.save(setupVehicleBind())
+        }
+
+        binding?.typeRadioGroup?.setOnCheckedChangeListener { _, checkedId ->
+           showContentCylinderCapacity(checkedId)
+        }
+    }
+
+    private fun showContentCylinderCapacity(checkedId: Int) {
+        binding?.contentCylinderCapacity?.visibility = when (checkedId) {
+            R.id.option_motorcycle -> View.VISIBLE
+            else -> View.GONE
         }
     }
 
