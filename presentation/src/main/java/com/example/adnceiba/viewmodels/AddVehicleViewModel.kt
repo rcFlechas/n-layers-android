@@ -4,34 +4,44 @@ import Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.adnceiba.binds.VehicleBind
 import com.example.adnceiba.mappers.VehicleBindToVehicle
 import com.example.adnceiba.ui.UIState
 import com.example.domain.services.VehicleService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import io.reactivex.Completable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 
 class AddVehicleViewModel(private val vehicleService: VehicleService) : ViewModel() {
+
+    private val subscriptions = CompositeDisposable()
 
     private val _saveLiveData = MutableLiveData<Event<UIState<Boolean>>>()
     val saveLiveData: LiveData<Event<UIState<Boolean>>> = _saveLiveData
 
     fun save(vehicleBind: VehicleBind) {
 
-        _saveLiveData.postValue(Event(UIState.OnLoading(true)))
-        viewModelScope.launch(Dispatchers.IO) {
+        subscriptions.add(
+            Completable.fromCallable { vehicleService.saveVehicle(VehicleBindToVehicle().map(vehicleBind)) }
+                .doOnSubscribe {
+                    _saveLiveData.postValue(Event(UIState.OnLoading(true)))
+                }
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                    onComplete = {
+                        _saveLiveData.postValue(
+                            Event(UIState.OnSuccess( true))
+                        )
+                    },
+                    onError = {
+                        _saveLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                    }
+                )
+        )
+    }
 
-            val isSave = async {
-                vehicleService.saveVehicle(VehicleBindToVehicle()
-                    .map(vehicleBind))
-            }
-
-            _saveLiveData.postValue(
-                Event(UIState.OnSuccess( isSave.await()))
-            )
-            _saveLiveData.postValue(Event(UIState.OnLoading(false)))
-        }
+    fun closeSubscriptions() {
+        subscriptions.dispose()
     }
 }

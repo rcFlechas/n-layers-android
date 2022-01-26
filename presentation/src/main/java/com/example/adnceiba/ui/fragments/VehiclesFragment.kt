@@ -33,6 +33,7 @@ class VehiclesFragment : Fragment() {
                     isLoading(uiState.loading)
                 }
                 is UIState.OnSuccess -> {
+                    isLoading(false)
                     val data = uiState.data
                     vehicleAdapter.clearData()
                     if (data.isNotEmpty()) {
@@ -43,6 +44,7 @@ class VehiclesFragment : Fragment() {
                     }
                 }
                 is UIState.OnError -> {
+                    isLoading(false)
                     dataEmpty(uiState.error)
                 }
             }
@@ -71,7 +73,7 @@ class VehiclesFragment : Fragment() {
 
     private fun setupEvents() {
 
-        _binding?.root?.fabAddVehicle?.setOnClickListener {
+        _binding?.fabAddVehicle?.setOnClickListener {
             findNavController().navigate(R.id.action_vehiclesFragment_to_addVehicleFragment)
         }
     }
@@ -81,7 +83,7 @@ class VehiclesFragment : Fragment() {
         })
 
         vehicleAdapter.setHasStableIds(true)
-        binding?.userRecyclerView?.apply {
+        binding?.vehiclesRecyclerView?.apply {
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
             setHasFixedSize(true)
             adapter = vehicleAdapter
@@ -97,13 +99,13 @@ class VehiclesFragment : Fragment() {
     }
 
     private fun dataEmpty(text: String = String()) {
-        binding?.fabAddVehicle?.visibility = View.GONE
+        binding?.vehiclesRecyclerView?.visibility = View.GONE
         binding?.includeEmptyView?.root?.visibility = View.VISIBLE
         binding?.includeEmptyView?.emptyTextView?.text = text
     }
 
     private fun dataNoEmpty() {
-        binding?.fabAddVehicle?.visibility = View.VISIBLE
+        binding?.vehiclesRecyclerView?.visibility = View.VISIBLE
         binding?.includeEmptyView?.root?.visibility = View.GONE
     }
 

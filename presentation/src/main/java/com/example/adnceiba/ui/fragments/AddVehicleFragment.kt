@@ -31,10 +31,12 @@ class AddVehicleFragment : Fragment() {
                     isLoading(uiState.loading)
                 }
                 is UIState.OnSuccess -> {
+                    isLoading( false)
                     val isSave = uiState.data
                     if (isSave) requireActivity().onBackPressed()
                 }
                 is UIState.OnError -> {
+                    isLoading( false)
                 }
             }
         }

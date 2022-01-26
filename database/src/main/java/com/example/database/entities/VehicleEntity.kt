@@ -14,14 +14,14 @@ data class VehicleEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "vehi_id")
-    val id: Long = 0L,
+    var id: Long = 0L,
 
     @ColumnInfo(name = "vehi_register")
-    val register: String = String(),
+    var register: String = String(),
 
     @ColumnInfo(name = "vehi_cylinder_capacity")
-    val cylinderCapacity: Int? = null,
+    var cylinderCapacity: Int? = null,
 
     @ColumnInfo(name = "vehi_type")
-    val typeVehicle: TypeVehicle = TypeVehicle.CAR
+    var typeVehicle: TypeVehicle = TypeVehicle.CAR
 )

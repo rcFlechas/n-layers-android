@@ -12,7 +12,7 @@ import java.util.*
 
 class PlaceService (private val placeRepository: PlaceRepository) {
 
-    fun entry(place: Place): Boolean {
+    fun entry(place: Place) {
 
         if (!place.isEnableToEntry()) {
             throw EntryNotAuthorizedException()
@@ -21,10 +21,10 @@ class PlaceService (private val placeRepository: PlaceRepository) {
         if (!thereArePlacesAvailable(listPlaces, place)) {
             throw NotPlaceAvailableException()
         }
-        return placeRepository.savePlace(place)
+        placeRepository.savePlace(place)
     }
 
-    fun exit(placeId: Long): Boolean {
+    fun exit(placeId: Long) {
 
         val place = placeRepository.getPlaceById(placeId)
         if (!place.isStateBusy()) {
@@ -32,7 +32,7 @@ class PlaceService (private val placeRepository: PlaceRepository) {
         }
         place.state = State.FREE
         place.timeBusy.freeDate = Date()
-        return placeRepository.updatePlace(place)
+        placeRepository.updatePlace(place)
     }
 
     fun getTotalPay(placeId: Long): String {

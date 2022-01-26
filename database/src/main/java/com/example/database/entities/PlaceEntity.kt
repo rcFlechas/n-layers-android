@@ -15,17 +15,17 @@ data class PlaceEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "plac_id")
-    val id: Long = 0L,
+    var id: Long = 0L,
 
     @ColumnInfo(name = "plac_busy_date")
-    val busyDate: Date = Date(),
+    var busyDate: Date = Date(),
 
     @ColumnInfo(name = "plac_free_date")
-    val freeDate: Date = Date(),
+    var freeDate: Date = Date(),
 
     @ColumnInfo(name = "plac_state")
-    val state: State = State.BUSY,
+    var state: State = State.BUSY,
 
     @ColumnInfo(name = "vehi_id")
-    val vehicleId: Long = 0L
+    var vehicleId: Long = 0L
 )

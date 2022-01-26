@@ -13,5 +13,5 @@ interface VehicleDAO {
     fun getVehicleById(id: Long) : VehicleEntity
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveVehicle(vehicleEntity: VehicleEntity): Boolean
+    fun saveVehicle(vehicleEntity: VehicleEntity)
 }

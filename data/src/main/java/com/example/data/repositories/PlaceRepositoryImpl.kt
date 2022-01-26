@@ -14,8 +14,8 @@ class PlaceRepositoryImpl(private val placeLocalDataSource: PlaceLocalDataSource
 
     override fun getPlaceById(id: Long): Place = placeLocalDataSource.getPlaceById(id)
 
-    override fun savePlace(place: Place): Boolean = placeLocalDataSource.savePlace(place)
+    override fun savePlace(place: Place) = placeLocalDataSource.savePlace(place)
 
-    override fun updatePlace(place: Place): Boolean =
+    override fun updatePlace(place: Place) =
         placeLocalDataSource.updatePlace(place)
 }

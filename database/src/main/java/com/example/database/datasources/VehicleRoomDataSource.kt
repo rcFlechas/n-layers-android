@@ -17,6 +17,6 @@ class VehicleRoomDataSource(private val vehicleDAO: VehicleDAO) : VehicleLocalDa
         VehicleEntityToVehicle()
             .map(vehicleDAO.getVehicleById(id))
 
-    override fun saveVehicle(vehicle: Vehicle): Boolean =
+    override fun saveVehicle(vehicle: Vehicle) =
         vehicleDAO.saveVehicle(VehicleToVehicleEntity().map(vehicle))
 }

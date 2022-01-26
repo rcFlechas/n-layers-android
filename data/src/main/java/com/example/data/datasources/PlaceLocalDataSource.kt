@@ -8,6 +8,6 @@ interface PlaceLocalDataSource {
     fun getPlacesAll(): List<Place>
     fun getPlacesAllByState(state: State): List<Place>
     fun getPlaceById(id: Long) : Place
-    fun savePlace(place: Place): Boolean
-    fun updatePlace(place: Place): Boolean
+    fun savePlace(place: Place)
+    fun updatePlace(place: Place)
 }
