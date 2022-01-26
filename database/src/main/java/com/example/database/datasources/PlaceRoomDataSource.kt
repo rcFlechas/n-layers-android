@@ -14,13 +14,9 @@ class PlaceRoomDataSource(private val placeDAO: PlaceDAO) : PlaceLocalDataSource
         ListMapperImpl(PlaceEntityToPlace())
             .map(placeDAO.getPlacesAll())
 
-    override fun getPlacesAllByState(state: State): List<Place> {
-        TODO("Not yet implemented")
-    }
-
-//    override fun getPlacesAllByState(state: State): List<Place> =
-//        ListMapperImpl(PlaceEntityToPlace())
-//            .map(placeDAO.getPlacesAllByState(state))
+    override fun getPlacesAllByState(state: State): List<Place> =
+        ListMapperImpl(PlaceEntityToPlace())
+            .map(placeDAO.getPlacesAllByState(state.name))
 
     override fun getPlaceById(id: Long): Place =
         PlaceEntityToPlace()
@@ -29,10 +25,6 @@ class PlaceRoomDataSource(private val placeDAO: PlaceDAO) : PlaceLocalDataSource
     override fun savePlace(place: Place) =
         placeDAO.savePlace(PlaceToPlaceEntity().map(place))
 
-    override fun updatePlace(place: Place) {
-        TODO("Not yet implemented")
-    }
-
-//    override fun updatePlace(place: Place) =
-//        placeDAO.updatePlace(place.id, place.timeBusy.freeDate, place.state)
+    override fun updatePlace(place: Place) =
+        placeDAO.updatePlace(place.id, place.timeBusy.freeDate, place.state.name)
 }

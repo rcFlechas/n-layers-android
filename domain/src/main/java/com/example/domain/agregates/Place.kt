@@ -6,13 +6,12 @@ import com.example.domain.enum.State
 import com.example.domain.extensions.dayOfWeek
 import com.example.domain.valueobjects.TimeBusy
 import java.math.BigDecimal
-import java.util.*
 
 abstract class Place(
     open val id: Long,
     open val vehicle: Vehicle,
     open val timeBusy: TimeBusy,
-    open var state: State,
+    open var state: State
 ) {
 
     abstract val totalPay: String

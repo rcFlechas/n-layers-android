@@ -1,6 +1,7 @@
 package com.example.domain.extensions
 
 import com.example.domain.enum.DayOfWeek
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
 
@@ -28,3 +29,10 @@ fun Date.dayOfWeek(): DayOfWeek {
         else -> DayOfWeek.SATURDAY
     }
 }
+
+fun Date?.dateFormat(pattern: String) : String? = if (this != null) {
+    try { SimpleDateFormat(pattern, Locale.ROOT).format(this) } catch (e: Exception) {
+        e.printStackTrace().toString()
+        null
+    }
+} else null

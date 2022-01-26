@@ -13,11 +13,11 @@ class VehicleAdapter(
 
     private var dataItems = arrayListOf<VehicleBind>()
 
-    fun setData(usersBind: List<VehicleBind>) {
+    fun setData(vehiclesBind: List<VehicleBind>) {
         dataItems.clear()
-        dataItems.addAll(usersBind)
+        dataItems.addAll(vehiclesBind)
         elements.clear()
-        elements.addAll(usersBind)
+        elements.addAll(vehiclesBind)
         notifyDataSetChanged()
     }
 
@@ -38,10 +38,10 @@ class VehicleAdapter(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
-        val userBind = elements[position]
+        val vehicleBind = elements[position]
 
         when (holder) {
-            is ViewHolder -> holder.bind(userBind)
+            is ViewHolder -> holder.bind(vehicleBind)
         }
     }
 
