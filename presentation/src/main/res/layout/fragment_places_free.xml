@@ -8,7 +8,7 @@
     tools:context=".ui.fragments.PlacesFreeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/user_recyclerView"
+        android:id="@+id/place_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_place"

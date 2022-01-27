@@ -1,19 +1,12 @@
 package com.example.adnceiba.ui.fragments
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.adnceiba.ItemPicker
 import com.example.adnceiba.R
 import com.example.adnceiba.adapters.PlaceAdapter
 import com.example.adnceiba.binds.*
