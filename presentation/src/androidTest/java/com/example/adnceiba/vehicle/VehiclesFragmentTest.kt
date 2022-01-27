@@ -24,7 +24,5 @@ class VehiclesFragmentTest {
         // WHEN
         launchFragmentInContainer<VehiclesFragment>(null, R.style.Theme_ADNCeiba)
         onView(withId(R.id.fabAddVehicle)).check(matches(isDisplayed()))
-        onView(withId(R.id.fabAddVehicle)).perform(click())
-        onView(withId(R.id.content_add_vehicle)).check(matches(isDisplayed()))
     }
 }
