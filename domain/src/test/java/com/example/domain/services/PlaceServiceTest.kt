@@ -134,7 +134,7 @@ class PlaceServiceTest {
     }
 
     @Test
-    fun entry_isEntry_returnTrue() {
+    fun entry_entryPlace_returnUnit() {
 
         //Arrange
         val place3 = aPlaceCar()
@@ -153,36 +153,10 @@ class PlaceServiceTest {
             .build()
 
         //Act
-        val isEntry = placeService.entry(place3)
+        val entryPlace = placeService.entry(place3)
 
         //Assert
-        assertThat(isEntry, `is`(true))
-    }
-
-    @Test
-    fun entry_isEntry_returnFalse() {
-
-        //Arrange
-        val place3 = aPlaceCar()
-            .withId(3)
-            .with(
-                aCar()
-                    .withId(0)
-                    .withRegister("DDD")
-            )
-            .with(
-                aTimeBusy()
-                    .withBusyDate("2022-01-14T15:30")
-                    .withFreeDate("2022-01-14T15:30")
-            )
-            .withState(State.BUSY)
-            .build()
-
-        //Act
-        val isEntry = placeService.entry(place3)
-
-        //Assert
-        assertThat(isEntry, `is`(false))
+        assertThat(entryPlace, `is`(Unit))
     }
 
     @Test
@@ -407,7 +381,7 @@ class PlaceServiceTest {
     }
 
     @Test
-    fun exit_isExit_returnTrue() {
+    fun exit_exitPlace_returnUnit() {
 
         //Arrange
         val place3 = aPlaceCar()
@@ -427,38 +401,10 @@ class PlaceServiceTest {
         fakePlaceRepository.addPlaces(place3)
 
         //Act
-        val isExit = placeService.exit(3)
+        val exitPlace = placeService.exit(3)
 
         //Assert
-        assertThat(isExit, `is`(true))
-    }
-
-    @Test
-    fun exit_isExit_returnFalse() {
-
-        //Arrange
-        val placeId = 0L
-        val place3 = aPlaceCar()
-            .withId(placeId)
-            .with(
-                aCar()
-                    .withId(3)
-                    .withRegister("DDD")
-            )
-            .with(
-                aTimeBusy()
-                    .withBusyDate("2022-01-14T15:30")
-                    .withFreeDate("2022-01-14T15:30")
-            )
-            .withState(State.BUSY)
-            .build()
-        fakePlaceRepository.addPlaces(place3)
-
-        //Act
-        val isExit = placeService.exit(placeId)
-
-        //Assert
-        assertThat(isExit, `is`(false))
+        assertThat(exitPlace, `is`(Unit))
     }
 
     @Test

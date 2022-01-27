@@ -25,9 +25,7 @@ class FakeVehicleRepository : VehicleRepository {
         return vehiclesServiceData.values.toList().find { it.id == id }!!
     }
 
-    override fun saveVehicle(vehicle: Vehicle): Boolean {
-        if (vehicle.register.isEmpty()) return false
+    override fun saveVehicle(vehicle: Vehicle) {
         vehiclesServiceData[vehicle.id] = vehicle
-        return vehiclesServiceData.values.toList().any { it.id == vehicle.id }
     }
 }

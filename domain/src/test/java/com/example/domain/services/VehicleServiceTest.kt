@@ -69,7 +69,7 @@ class VehicleServiceTest {
     }
 
     @Test
-    fun saveVehicle_isSave_returnTrue() {
+    fun saveVehicle_save_returnUnit() {
 
         //Arrange
         val vehicleId = 3L
@@ -79,27 +79,10 @@ class VehicleServiceTest {
             .build()
 
         //Act
-        val isSave = vehicleService.saveVehicle(vehicle3)
+        val save = vehicleService.saveVehicle(vehicle3)
 
         //Assert
-        MatcherAssert.assertThat(isSave, Matchers.`is`(true))
-    }
-
-    @Test
-    fun saveVehicle_isSave_returnFalse() {
-
-        //Arrange
-        val vehicleId = 3L
-        val vehicle3 = aCar()
-            .withId(vehicleId)
-            .withRegister(String())
-            .build()
-
-        //Act
-        val isSave = vehicleService.saveVehicle(vehicle3)
-
-        //Assert
-        MatcherAssert.assertThat(isSave, Matchers.`is`(false))
+        MatcherAssert.assertThat(save, Matchers.`is`(Unit))
     }
 
     @Test

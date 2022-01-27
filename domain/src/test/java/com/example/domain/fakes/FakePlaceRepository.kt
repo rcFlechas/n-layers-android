@@ -30,17 +30,11 @@ class FakePlaceRepository: PlaceRepository {
         return placesServiceData.values.toList().find { it.id == id }!!
     }
 
-    override fun savePlace(place: Place): Boolean {
-
-        if (place.vehicle.id == 0L) return false
+    override fun savePlace(place: Place) {
         placesServiceData[place.id] = place
-        return placesServiceData.values.toList().any { it.id == place.id }
     }
 
-    override fun updatePlace(place: Place): Boolean {
-
-        if (place.id== 0L) return false
+    override fun updatePlace(place: Place) {
         placesServiceData[place.id] = place
-        return placesServiceData.values.toList().any { it.id == place.id }
     }
 }
