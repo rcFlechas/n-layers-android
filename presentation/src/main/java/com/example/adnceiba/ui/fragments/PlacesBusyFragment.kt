@@ -95,6 +95,28 @@ class PlacesBusyFragment : Fragment() {
         }
     }
 
+    private fun freePlaceLiveDataHandler() {
+
+        placesBusyViewModel.freePlaceLiveData.observeEvent(viewLifecycleOwner) { uiState ->
+
+            when (uiState) {
+                is UIState.OnLoading -> {
+                    isLoading(uiState.loading)
+                }
+                is UIState.OnSuccess -> {
+                    isLoading( false)
+                    val isSave = uiState.data
+                    if (isSave) {
+                        placesBusyViewModel.getAllPlacesBusy()
+                    }
+                }
+                is UIState.OnError -> {
+                    isLoading( false)
+                }
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -112,6 +134,7 @@ class PlacesBusyFragment : Fragment() {
 
         allPlacesBusyLiveDataHandler()
         savePlaceLiveDataHandler()
+        freePlaceLiveDataHandler()
         allVehiclesLiveDataHandler()
     }
 
@@ -162,9 +185,10 @@ class PlacesBusyFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        placeAdapter = PlaceAdapter ( longClickClosure = {
-        })
-
+        placeAdapter = PlaceAdapter()
+        placeAdapter.longClickClosure = { placeBind ->
+            placesBusyViewModel.freePlace(placeBind.id)
+        }
         placeAdapter.setHasStableIds(true)
         binding?.placeRecyclerView?.apply {
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)

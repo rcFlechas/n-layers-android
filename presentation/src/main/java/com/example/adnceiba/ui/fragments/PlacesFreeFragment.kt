@@ -70,9 +70,7 @@ class PlacesFreeFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        placeAdapter = PlaceAdapter ( longClickClosure = {
-        })
-
+        placeAdapter = PlaceAdapter ()
         placeAdapter.setHasStableIds(true)
         binding?.placeRecyclerView?.apply {
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)

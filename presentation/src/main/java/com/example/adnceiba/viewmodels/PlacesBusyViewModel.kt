@@ -33,6 +33,9 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
     private val _saveLiveData = MutableLiveData<Event<UIState<Boolean>>>()
     val saveLiveData: LiveData<Event<UIState<Boolean>>> = _saveLiveData
 
+    private val _freePlaceLiveData = MutableLiveData<Event<UIState<Boolean>>>()
+    val freePlaceLiveData: LiveData<Event<UIState<Boolean>>> = _freePlaceLiveData
+
     private val _allVehiclesLiveData = MutableLiveData<Event<UIState<List<VehicleBind>>>>()
     val allVehiclesLiveData: LiveData<Event<UIState<List<VehicleBind>>>> = _allVehiclesLiveData
 
@@ -121,6 +124,27 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                 )
         )
     }
+    fun freePlace(placeId: Long) {
+
+        subscriptions.add(
+            Completable.fromCallable { placeService.exit(placeId) }
+                .doOnSubscribe {
+                    _freePlaceLiveData.postValue(Event(UIState.OnLoading(true)))
+                }
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                    onComplete = {
+                        _freePlaceLiveData.postValue(
+                            Event(UIState.OnSuccess( true))
+                        )
+                    },
+                    onError = {
+                        _freePlaceLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                    }
+                )
+        )
+    }
+
 
     fun closeSubscriptions() {
         subscriptions.dispose()

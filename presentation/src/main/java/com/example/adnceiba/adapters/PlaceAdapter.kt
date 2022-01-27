@@ -8,11 +8,10 @@ import com.example.adnceiba.databinding.ItemPlaceBinding
 import com.example.domain.enum.State
 import com.example.domain.extensions.dateFormat
 
-class PlaceAdapter(
-    val longClickClosure: (PlaceBind) -> Unit
-) : CustomAdapter<PlaceBind, PlaceAdapter.ViewHolder>() {
+class PlaceAdapter : CustomAdapter<PlaceBind, PlaceAdapter.ViewHolder>() {
 
     private var dataItems = arrayListOf<PlaceBind>()
+    internal var longClickClosure: (PlaceBind)-> Unit = {}
 
     fun setData(placesBind: List<PlaceBind>) {
         dataItems.clear()
@@ -56,7 +55,7 @@ class PlaceAdapter(
             binding.descriptionVehicle.text = item.vehicle.register
             binding.descriptionType.text = "TODO"
             binding.descriptionDateBusy.text = item.timeBusy.busyDate.dateFormat("dd/MM/yyyy HH:mm")
-            binding.descriptionDateFree.text = item.timeBusy.busyDate.dateFormat("dd/MM/yyyy HH:mm")
+            binding.descriptionDateFree.text = item.timeBusy.freeDate.dateFormat("dd/MM/yyyy HH:mm")
             binding.descriptionTotalPay.text = "${item.totalPay} COP"
             binding.titleLabel.text = item.state.name
         }
