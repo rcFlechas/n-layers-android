@@ -162,7 +162,7 @@ class PlacesBusyFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        placeAdapter = PlaceAdapter ( clickClosure = {
+        placeAdapter = PlaceAdapter ( longClickClosure = {
         })
 
         placeAdapter.setHasStableIds(true)

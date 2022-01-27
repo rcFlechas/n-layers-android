@@ -2,12 +2,14 @@ package com.example.adnceiba.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.adnceiba.R
 import com.example.adnceiba.binds.PlaceBind
 import com.example.adnceiba.databinding.ItemPlaceBinding
+import com.example.domain.enum.State
 import com.example.domain.extensions.dateFormat
 
 class PlaceAdapter(
-    val clickClosure: (PlaceBind) -> Unit
+    val longClickClosure: (PlaceBind) -> Unit
 ) : CustomAdapter<PlaceBind, PlaceAdapter.ViewHolder>() {
 
     private var dataItems = arrayListOf<PlaceBind>()
@@ -40,7 +42,10 @@ class PlaceAdapter(
         val placeBind = elements[position]
 
         when (holder) {
-            is ViewHolder -> holder.bind(placeBind)
+            is ViewHolder -> {
+                holder.bind(placeBind)
+                holder.events(placeBind)
+            }
         }
     }
 
@@ -54,6 +59,20 @@ class PlaceAdapter(
             binding.descriptionDateFree.text = item.timeBusy.busyDate.dateFormat("dd/MM/yyyy HH:mm")
             binding.descriptionTotalPay.text = "${item.totalPay} COP"
             binding.titleLabel.text = item.state.name
+        }
+
+        fun events(item: PlaceBind) {
+
+            if (item.state == State.BUSY) {
+
+                binding.root.setOnCreateContextMenuListener { menu, _, _ ->
+                    val deleteOption = menu.add(R.string.title_button_free)
+                    deleteOption.setOnMenuItemClickListener {
+                        longClickClosure(item)
+                        false
+                    }
+                }
+            }
         }
     }
 }
