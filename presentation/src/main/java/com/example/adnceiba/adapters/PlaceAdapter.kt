@@ -53,7 +53,7 @@ class PlaceAdapter : CustomAdapter<PlaceBind, PlaceAdapter.ViewHolder>() {
         override fun bind(item: PlaceBind) {
 
             binding.descriptionVehicle.text = item.vehicle.register
-            binding.descriptionType.text = "TODO"
+            binding.descriptionType.text = item.vehicle.label
             binding.descriptionDateBusy.text = item.timeBusy.busyDate.dateFormat("dd/MM/yyyy HH:mm")
             binding.descriptionDateFree.text = item.timeBusy.freeDate.dateFormat("dd/MM/yyyy HH:mm")
             binding.descriptionTotalPay.text = "${item.totalPay} COP"
