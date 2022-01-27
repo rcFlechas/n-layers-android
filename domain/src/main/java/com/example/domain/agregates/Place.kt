@@ -35,7 +35,11 @@ abstract class Place(
     open fun calculateTotalPay(costByHour: Int, costByDay: Int): BigDecimal {
 
         var days = timeBusy.daysWithHours.first.toInt()
-        var hours = timeBusy.daysWithHours.second.toInt()
+        var hours = if (isHorsNotRound() ) {
+            timeBusy.daysWithHours.second.toInt() + ONE_HOUR
+        } else {
+            timeBusy.daysWithHours.second.toInt()
+        }
 
         if (hours >= NINE_HOURS) {
             days++
@@ -46,8 +50,13 @@ abstract class Place(
         return BigDecimal(total)
     }
 
+    private fun isHorsNotRound(): Boolean {
+        return (timeBusy.daysWithHours.second > 0.0) && (timeBusy.daysWithHours.second % ONE_HOUR != 0.0)
+    }
+
     companion object {
         private const val FIRST_REGISTER_LETTER = 'A'
         private const val NINE_HOURS = 9
+        private const val ONE_HOUR = 1
     }
 }

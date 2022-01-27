@@ -530,6 +530,60 @@ class PlaceServiceTest {
     }
 
     @Test
+    fun getTotalPay_totalOneMinutesByCar_returnString1000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceCar()
+            .withId(placeId)
+            .with(
+                aCar()
+                    .withId(3)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-27T12:20")
+                    .withFreeDate("2022-01-27T12:21")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByCar = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByCar, `is`("1000"))
+    }
+
+    @Test
+    fun getTotalPay_totalTwoHoursOneMinutesByCar_returnString3000() {
+
+        //Arrange
+        val placeId = 3L
+        val place3 = aPlaceCar()
+            .withId(placeId)
+            .with(
+                aCar()
+                    .withId(3)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-27T12:20")
+                    .withFreeDate("2022-01-27T14:21")
+            )
+            .build()
+        fakePlaceRepository.addPlaces(place3)
+
+        //Act
+        val totalByCar = placeService.getTotalPay(placeId)
+
+        //Assert
+        assertThat(totalByCar, `is`("3000"))
+    }
+
+    @Test
     fun getTotalPay_totalTwoDaysByCar_returnString16000() {
 
         //Arrange
