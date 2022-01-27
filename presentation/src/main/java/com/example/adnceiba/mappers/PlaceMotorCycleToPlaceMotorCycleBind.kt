@@ -6,14 +6,15 @@ import com.example.domain.mappers.Mapper
 
 class PlaceMotorCycleToPlaceMotorCycleBind : Mapper<PlaceMotorCycle, PlaceMotorCycleBind> {
 
-    override fun map(input: PlaceMotorCycle): PlaceMotorCycleBind = with(input) {
-        PlaceMotorCycleBind(
-            id = id,
+    override fun map(input: PlaceMotorCycle): PlaceMotorCycleBind  {
+        val placeMotorCycleBind = PlaceMotorCycleBind(
+            id = input.id,
             vehicle = MotorCycleToMotorCycleBind()
-                .map(vehicle),
-            timeBusy = timeBusy,
-            state = state,
-            totalPay = totalPay
+                .map(input.vehicle),
+            timeBusy = input.timeBusy,
+            state = input.state,
         )
+        placeMotorCycleBind.totalPay = input.totalPay
+        return placeMotorCycleBind
     }
 }

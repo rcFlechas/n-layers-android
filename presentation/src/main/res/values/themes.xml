@@ -17,4 +17,14 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:background">@android:color/white</item>
     </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/blue_39AAFF</item>
+        <item name="android:windowBackground">@drawable/border_radius_alert_dialog</item>
+        <!-- Landscape -->
+        <item name="android:windowMinWidthMajor">50%</item>
+        <!-- Portrait -->
+        <item name="android:windowMinWidthMinor">70%</item>
+    </style>
 </resources>

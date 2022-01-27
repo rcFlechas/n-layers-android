@@ -1,7 +1,13 @@
 package com.example.adnceiba.binds
 
-abstract class VehicleBind {
-    abstract val id: Long
-    abstract val register: String
-    abstract val label: String
+import com.example.adnceiba.ItemPicker
+
+open class VehicleBind(
+    override val id: Long,
+    open val register: String
+): ItemPicker {
+    open val label: String = String()
+    override val title: String
+        get() = register
+
 }

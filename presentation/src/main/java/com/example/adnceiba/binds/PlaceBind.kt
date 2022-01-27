@@ -8,5 +8,5 @@ abstract class PlaceBind {
     abstract val vehicle: VehicleBind
     abstract val timeBusy: TimeBusy
     abstract var state: State
-    abstract val totalPay: String
+    abstract var totalPay: String
 }

@@ -10,6 +10,6 @@ import org.koin.dsl.module
 
 val presentationModule = module {
     viewModel { VehiclesViewModel(VehicleService(vehicleRepository = get())) }
-    viewModel { PlacesBusyViewModel(PlaceService(placeRepository = get())) }
+    viewModel { PlacesBusyViewModel(PlaceService(placeRepository = get()), VehicleService(vehicleRepository = get())) }
     viewModel { AddVehicleViewModel(VehicleService(vehicleRepository = get())) }
 }

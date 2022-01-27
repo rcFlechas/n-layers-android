@@ -4,7 +4,7 @@ class MotorCycleBind(
     override val id: Long = 0,
     override val register: String,
     val cylinderCapacity: Int
-): VehicleBind() {
+): VehicleBind(id, register) {
 
     override val label: String = MOTORCYCLE
 

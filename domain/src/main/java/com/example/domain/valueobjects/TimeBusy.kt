@@ -4,8 +4,8 @@ import com.example.domain.extensions.differenceInDaysWithHours
 import java.util.*
 
 class TimeBusy(
-    val busyDate: Date,
-    var freeDate: Date,
+    val busyDate: Date = Date(),
+    var freeDate: Date = Date(),
 ) {
 
     val daysWithHours : Pair<Double, Double>
