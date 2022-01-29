@@ -1,79 +1,20 @@
-package com.example.domain.services
+package com.example.domain.services.vehicle
 
-import com.example.domain.entities.CarBuilder.Companion.aCar
-import com.example.domain.entities.MotorCycleBuilder.Companion.aMotorCycle
+import com.example.domain.entities.CarBuilder
 import com.example.domain.exceptions.RegisterCharactersNotAllowedException
 import com.example.domain.exceptions.RegisterLengthNotAllowedException
-import com.example.domain.fakes.FakeVehicleRepository
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
-import org.junit.Before
 import org.junit.Test
 
-class VehicleServiceTest {
-
-    private lateinit var fakeVehicleRepository: FakeVehicleRepository
-
-    private lateinit var vehicleService: VehicleService
-
-    @Before
-    fun setupService() {
-
-        fakeVehicleRepository = FakeVehicleRepository()
-
-        val vehicle1 = aCar()
-            .build()
-
-        val vehicle2 = aMotorCycle()
-            .build()
-
-        fakeVehicleRepository.addVehicles(vehicle1, vehicle2)
-
-        vehicleService = VehicleService(fakeVehicleRepository)
-    }
-
-    @Test
-    fun getVehiclesAll_listSize_returnThree() {
-
-        //Arrange
-        val vehicleId = 3L
-        val vehicle3 = aCar()
-            .withId(vehicleId)
-            .withRegister("CCC")
-            .build()
-        fakeVehicleRepository.addVehicles(vehicle3)
-
-        //Act
-        val listSize = vehicleService.getVehiclesAll().size
-
-        //Assert
-        MatcherAssert.assertThat(listSize, Matchers.`is`(3))
-    }
-
-    @Test
-    fun getVehicleById_vehicleId_returnThree() {
-
-        //Arrange
-        val vehicleId = 3L
-        val vehicle3 = aCar()
-            .withId(vehicleId)
-            .withRegister("CCC")
-            .build()
-        fakeVehicleRepository.addVehicles(vehicle3)
-
-        //Act
-        val resultVehicleId = vehicleService.getVehicleById(vehicleId).id
-
-        //Assert
-        MatcherAssert.assertThat(resultVehicleId, Matchers.`is`(vehicleId))
-    }
+class SaveVehicleServiceTest : VehicleServiceTest() {
 
     @Test
     fun saveVehicle_save_returnUnit() {
 
         //Arrange
         val vehicleId = 3L
-        val vehicle3 = aCar()
+        val vehicle3 = CarBuilder.aCar()
             .withId(vehicleId)
             .withRegister("CCC")
             .build()
@@ -92,7 +33,7 @@ class VehicleServiceTest {
         //Act
         val isRegisterCharactersNotAllowedException = try {
             val vehicleId = 3L
-            aCar()
+            CarBuilder.aCar()
                 .withId(vehicleId)
                 .withRegister("\uD83D\uDE00")
                 .build()
@@ -112,7 +53,7 @@ class VehicleServiceTest {
         //Act
         val isRegisterLengthNotAllowedException = try {
             val vehicleId = 3L
-            aCar()
+            CarBuilder.aCar()
                 .withId(vehicleId)
                 .withRegister("CCCC")
                 .build()
