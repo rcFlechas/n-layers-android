@@ -46,6 +46,8 @@ class PlaceService (private val placeRepository: PlaceRepository) {
 
     fun getPlaceById(placeId: Long) = placeRepository.getPlaceById(placeId)
 
+    fun deletePlacesAll() = placeRepository.deletePlacesAll()
+
     private fun getPlacesSizeByCar(listPlace: List<Place>) = listPlace.filter { it.vehicle is Car }.size
 
     private fun getPlacesSizeByMotorCycle(listPlace: List<Place>) = listPlace.filter { it.vehicle is MotorCycle }.size

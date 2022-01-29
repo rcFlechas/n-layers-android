@@ -19,4 +19,6 @@ class VehicleRoomDataSource(private val vehicleDAO: VehicleDAO) : VehicleLocalDa
 
     override fun saveVehicle(vehicle: Vehicle) =
         vehicleDAO.saveVehicle(VehicleToVehicleEntity().map(vehicle))
+
+    override fun deleteVehiclesAll() = vehicleDAO.deleteVehiclesAll()
 }

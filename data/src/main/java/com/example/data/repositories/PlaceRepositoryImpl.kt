@@ -18,4 +18,6 @@ class PlaceRepositoryImpl(private val placeLocalDataSource: PlaceLocalDataSource
 
     override fun updatePlace(place: Place) =
         placeLocalDataSource.updatePlace(place)
+
+    override fun deletePlacesAll() = placeLocalDataSource.deletePlacesAll()
 }

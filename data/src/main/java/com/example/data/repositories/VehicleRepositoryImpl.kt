@@ -11,4 +11,6 @@ class VehicleRepositoryImpl(private val vehicleLocalDataSource: VehicleLocalData
     override fun getVehicleById(id: Long): Vehicle = vehicleLocalDataSource.getVehicleById(id)
 
     override fun saveVehicle(vehicle: Vehicle) = vehicleLocalDataSource.saveVehicle(vehicle)
+
+    override fun deleteVehiclesAll() = vehicleLocalDataSource.deleteVehiclesAll()
 }

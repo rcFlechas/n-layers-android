@@ -27,4 +27,6 @@ class PlaceRoomDataSource(private val placeDAO: PlaceDAO) : PlaceLocalDataSource
 
     override fun updatePlace(place: Place) =
         placeDAO.updatePlace(place.id, place.timeBusy.freeDate, place.state.name)
+
+    override fun deletePlacesAll() = placeDAO.deletePlacesAll()
 }

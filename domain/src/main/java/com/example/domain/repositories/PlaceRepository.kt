@@ -10,4 +10,5 @@ interface PlaceRepository {
     fun getPlaceById(id: Long) : Place
     fun savePlace(place: Place)
     fun updatePlace(place: Place)
+    fun deletePlacesAll()
 }

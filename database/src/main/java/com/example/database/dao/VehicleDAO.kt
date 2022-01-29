@@ -14,4 +14,7 @@ interface VehicleDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun saveVehicle(vehicleEntity: VehicleEntity)
+
+    @Query("DELETE FROM vehicle")
+    fun deleteVehiclesAll()
 }

@@ -25,4 +25,7 @@ interface PlaceDAO {
 
     @Query("UPDATE place SET plac_free_date =:freeDate, plac_state =:state WHERE plac_id =:id")
     fun updatePlace(id: Long, freeDate: Date, state: String)
+
+    @Query("DELETE FROM place")
+    fun deletePlacesAll()
 }
