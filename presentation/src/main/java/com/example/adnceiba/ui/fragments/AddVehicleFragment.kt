@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.adnceiba.R
 import com.example.adnceiba.binds.CarBind
@@ -61,7 +63,9 @@ class AddVehicleFragment : Fragment() {
     private fun setupEvents() {
 
         binding?.saveVehicleButton?.setOnClickListener {
-            addVehicleViewModel.save(setupVehicleBind())
+            if (checkFields()) {
+                addVehicleViewModel.save(setupVehicleBind())
+            }
         }
 
         binding?.typeRadioGroup?.setOnCheckedChangeListener { _, checkedId ->
@@ -93,6 +97,75 @@ class AddVehicleFragment : Fragment() {
         }
     }
 
+    private fun checkFields(): Boolean {
+
+        val isRegisterValid = mandatoryFieldBackground(
+            field = Pair(binding?.addRegisterEditText, binding?.addRegisterTextView),
+            isValid = binding?.addRegisterEditText?.text?.trim()?.isNotEmpty() ?: false
+        )
+
+        val isTypeVehicleValid = mandatoryFieldBackground(
+            field = Pair(binding?.typeRadioGroup, binding?.addTypeTextView),
+            isValid = binding?.typeRadioGroup?.checkedRadioButtonId != IS_NOT_CHECK
+        )
+
+        return if(binding?.contentCylinderCapacity?.visibility == View.VISIBLE) {
+
+            val isCylinderCapacity = mandatoryFieldBackground(
+                field = Pair(binding?.addCylinderCapacityEditText, binding?.addCylinderCapacityTextView),
+                isValid = binding?.addCylinderCapacityEditText?.text?.trim()?.isNotEmpty() ?: false
+            )
+
+            !(!isRegisterValid || !isTypeVehicleValid || !isCylinderCapacity)
+        } else {
+            !(!isRegisterValid || !isTypeVehicleValid)
+        }
+    }
+
+    private fun mandatoryFieldBackground(field: Pair<View?, TextView?>, isValid: Boolean): Boolean {
+        val (element, title) = field
+        when (element) {
+            is EditText -> {
+                if (isValid) {
+                    element.setBackgroundColor(resources.getColor(R.color.gray_EEEEEE))
+                    title?.setTextColor(resources.getColor(R.color.primaryColor))
+                } else {
+                    element.background = ContextCompat.getDrawable(requireContext(), R.drawable.border_error_edit_text)
+                    title?.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_EB0240))
+                }
+            }
+            is TextView -> {
+                if (isValid) {
+                    title?.setTextColor(resources.getColor(R.color.primaryColor))
+                } else {
+                    title?.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_EB0240))
+                }
+            }
+            is RadioGroup -> {
+                val radios = ArrayList<RadioButton>()
+                for (i in element.childCount downTo 0 step 1) {
+                    val view = element.getChildAt(i)
+                    if (view is RadioButton) {
+                        radios.add(view)
+                    }
+                }
+
+                if (isValid) {
+                    radios.forEach {
+                        it.background = ContextCompat.getDrawable(requireContext(), android.R.color.transparent)
+                    }
+                    title?.setTextColor(resources.getColor(R.color.primaryColor))
+                } else {
+                    radios.forEach {
+                        it.background = ContextCompat.getDrawable(requireContext(), R.drawable.border_switch_form)
+                    }
+                    title?.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_EB0240))
+                }
+            }
+        }
+        return isValid
+    }
+
     private fun isLoading(loading: Boolean) {
         binding?.progressBar?.visibility = if (loading) {
             View.VISIBLE
@@ -104,5 +177,9 @@ class AddVehicleFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val IS_NOT_CHECK = -1
     }
 }
