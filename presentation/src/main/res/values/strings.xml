@@ -23,4 +23,6 @@
     <string name="title_save_vehicle">SAVE</string>
     <string name="title_button_free">Free</string>
     <string name="title_error">Error</string>
+    <string name="title_alert_warning">WARNING</string>
+    <string name="title_button_ok">OK</string>
 </resources>

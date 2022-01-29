@@ -10,4 +10,21 @@
         <item name="android:background">@color/gray_EEEEEE</item>
         <item name="android:backgroundTint">@color/gray_EEEEEE</item>
     </style>
+
+    <style name="ItemPlace">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:textColorPrimary">@color/colorSecondaryText</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:windowBackground">@drawable/border_radius_alert_dialog</item>
+        <!-- Landscape -->
+        <item name="android:windowMinWidthMajor">50%</item>
+        <!-- Portrait -->
+        <item name="android:windowMinWidthMinor">70%</item>
+    </style>
 </resources>

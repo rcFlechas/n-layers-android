@@ -1,6 +1,6 @@
 package com.example.adnceiba.binds
 
-import com.example.adnceiba.ItemPicker
+import com.example.adnceiba.widgets.ItemPicker
 
 open class VehicleBind(
     override val id: Long,

@@ -13,6 +13,7 @@ import com.example.adnceiba.binds.*
 import com.example.adnceiba.databinding.FragmentPlacesBusyBinding
 import com.example.adnceiba.extensions.observeEvent
 import com.example.adnceiba.ui.UIState
+import com.example.adnceiba.utilities.Dialog
 import com.example.adnceiba.viewmodels.PlacesBusyViewModel
 import com.example.adnceiba.widgets.PickerDialog
 import com.example.domain.enum.State
@@ -41,6 +42,7 @@ class PlacesBusyFragment : Fragment() {
                     vehiclesPickerDialog.setData(ArrayList(data))
                 }
                 is UIState.OnError -> {
+                    Dialog.basic(requireContext(), uiState.error)
                     dataEmpty(uiState.error)
                 }
             }
@@ -67,6 +69,7 @@ class PlacesBusyFragment : Fragment() {
                 }
                 is UIState.OnError -> {
                     isLoading(false)
+                    Dialog.basic(requireContext(), uiState.error)
                     dataEmpty(uiState.error)
                 }
             }
@@ -90,6 +93,7 @@ class PlacesBusyFragment : Fragment() {
                 }
                 is UIState.OnError -> {
                     isLoading( false)
+                    Dialog.basic(requireContext(), uiState.error)
                 }
             }
         }
@@ -112,6 +116,7 @@ class PlacesBusyFragment : Fragment() {
                 }
                 is UIState.OnError -> {
                     isLoading( false)
+                    Dialog.basic(requireContext(), uiState.error)
                 }
             }
         }

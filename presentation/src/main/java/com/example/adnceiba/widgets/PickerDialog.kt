@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.example.adnceiba.ItemPicker
 import com.example.adnceiba.R
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -124,4 +123,9 @@ class PickerDialog<T : ItemPicker> : DialogFragment() {
             it.attributes = windowParameter
         }
     }
+}
+
+interface ItemPicker {
+    val id: Long
+    val title: String
 }

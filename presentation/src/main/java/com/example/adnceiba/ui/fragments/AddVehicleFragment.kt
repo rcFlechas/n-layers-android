@@ -12,6 +12,7 @@ import com.example.adnceiba.binds.VehicleBind
 import com.example.adnceiba.databinding.FragmentAddVehicleBinding
 import com.example.adnceiba.extensions.observeEvent
 import com.example.adnceiba.ui.UIState
+import com.example.adnceiba.utilities.Dialog
 import com.example.adnceiba.viewmodels.AddVehicleViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,6 +38,7 @@ class AddVehicleFragment : Fragment() {
                 }
                 is UIState.OnError -> {
                     isLoading( false)
+                    Dialog.basic(requireContext(), uiState.error)
                 }
             }
         }
