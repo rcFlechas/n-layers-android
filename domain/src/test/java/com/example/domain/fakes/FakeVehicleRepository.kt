@@ -28,4 +28,8 @@ class FakeVehicleRepository : VehicleRepository {
     override fun saveVehicle(vehicle: Vehicle) {
         vehiclesServiceData[vehicle.id] = vehicle
     }
+
+    override fun deleteVehiclesAll() {
+        vehiclesServiceData.clear()
+    }
 }

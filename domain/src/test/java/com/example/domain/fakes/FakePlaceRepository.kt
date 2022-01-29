@@ -37,4 +37,8 @@ class FakePlaceRepository: PlaceRepository {
     override fun updatePlace(place: Place) {
         placesServiceData[place.id] = place
     }
+
+    override fun deletePlacesAll() {
+        placesServiceData.clear()
+    }
 }
