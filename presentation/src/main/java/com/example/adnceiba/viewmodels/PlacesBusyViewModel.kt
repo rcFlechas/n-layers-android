@@ -124,6 +124,7 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                 )
         )
     }
+
     fun freePlace(placeId: Long) {
 
         subscriptions.add(
@@ -144,7 +145,6 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                 )
         )
     }
-
 
     fun closeSubscriptions() {
         subscriptions.dispose()
