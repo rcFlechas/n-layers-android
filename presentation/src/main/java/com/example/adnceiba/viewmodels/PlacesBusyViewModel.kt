@@ -56,7 +56,7 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                         )
                     },
                     onError = {
-                        _allPlacesBusyLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _allPlacesBusyLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )
@@ -79,7 +79,7 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                         )
                     },
                     onError = {
-                        _allPlaceByIdLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _allPlaceByIdLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )
@@ -98,7 +98,7 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                         )
                     },
                     onError = {
-                        _allVehiclesLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _allVehiclesLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )
@@ -119,7 +119,7 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                         )
                     },
                     onError = {
-                        _saveLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _saveLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )
@@ -140,7 +140,7 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                         )
                     },
                     onError = {
-                        _freePlaceLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _freePlaceLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )

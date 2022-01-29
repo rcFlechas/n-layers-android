@@ -39,7 +39,7 @@ class PlacesFreeViewModel(private val placeService: PlaceService) : ViewModel() 
                         )
                     },
                     onError = {
-                        _allPlacesFreeLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _allPlacesFreeLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )

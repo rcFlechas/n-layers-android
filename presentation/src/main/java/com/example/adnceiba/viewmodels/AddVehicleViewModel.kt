@@ -35,7 +35,7 @@ class AddVehicleViewModel(private val vehicleService: VehicleService) : ViewMode
                         )
                     },
                     onError = {
-                        _saveLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _saveLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )

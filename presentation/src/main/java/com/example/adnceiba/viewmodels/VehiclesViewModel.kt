@@ -37,7 +37,7 @@ class VehiclesViewModel(private val vehicleService: VehicleService) : ViewModel(
                         )
                     },
                     onError = {
-                        _allVehiclesLiveData.postValue(Event( UIState.OnError(it.message ?: "Error" )))
+                        _allVehiclesLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
                     }
                 )
         )
