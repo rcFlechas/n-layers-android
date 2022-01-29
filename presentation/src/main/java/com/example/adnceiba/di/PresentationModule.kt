@@ -10,8 +10,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    viewModel { VehiclesViewModel(VehicleService(vehicleRepository = get())) }
-    viewModel { PlacesBusyViewModel(PlaceService(placeRepository = get()), VehicleService(vehicleRepository = get())) }
-    viewModel { PlacesFreeViewModel(PlaceService(placeRepository = get())) }
-    viewModel { AddVehicleViewModel(VehicleService(vehicleRepository = get())) }
+
+    single { PlaceService( placeRepository = get()) }
+    single { VehicleService( vehicleRepository = get()) }
+
+    viewModel { VehiclesViewModel(vehicleService = get()) }
+    viewModel { PlacesBusyViewModel(placeService = get(), vehicleService = get()) }
+    viewModel { PlacesFreeViewModel(placeService = get()) }
+    viewModel { AddVehicleViewModel(vehicleService = get()) }
 }
