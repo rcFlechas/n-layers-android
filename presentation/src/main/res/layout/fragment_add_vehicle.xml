@@ -118,6 +118,7 @@
                 android:layout_height="@dimen/dimen_36dp"
                 android:layout_marginTop="@dimen/dimen_2dp"
                 android:background="@color/gray_EEEEEE"
+                android:inputType="number"
                 tools:text="ATJ-89" />
 
         </LinearLayout>

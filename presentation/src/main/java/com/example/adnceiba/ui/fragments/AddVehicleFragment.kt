@@ -13,6 +13,8 @@ import com.example.adnceiba.binds.MotorCycleBind
 import com.example.adnceiba.binds.VehicleBind
 import com.example.adnceiba.databinding.FragmentAddVehicleBinding
 import com.example.adnceiba.extensions.observeEvent
+import com.example.adnceiba.extensions.onChange
+import com.example.adnceiba.filters.EmojiFilter
 import com.example.adnceiba.ui.UIState
 import com.example.adnceiba.utilities.Dialog
 import com.example.adnceiba.viewmodels.AddVehicleViewModel
@@ -56,28 +58,49 @@ class AddVehicleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupEvents()
+
+        setupClickEvents()
+        setupOnChangeEvents()
+        setupFilters()
         saveVehicleLiveDataHandler()
     }
 
-    private fun setupEvents() {
+    private fun setupOnChangeEvents() {
+        binding?.addRegisterEditText?.onChange { text ->
+            isRegisterValid(text)
+        }
+        binding?.typeRadioGroup?.setOnCheckedChangeListener { _, checkedId ->
+            clearCylinderCapacityEditText()
+            setVisibilityContentCylinderCapacity(checkedId)
+            isTypeVehicleValid(checkedId)
+        }
+        binding?.addCylinderCapacityEditText?.onChange { text ->
+            isCylinderCapacity(text)
+        }
+    }
+
+    private fun setupFilters() {
+        binding?.addRegisterEditText?.filters = EmojiFilter.filter
+    }
+
+    private fun setupClickEvents() {
 
         binding?.saveVehicleButton?.setOnClickListener {
             if (checkFields()) {
                 addVehicleViewModel.save(setupVehicleBind())
             }
         }
-
-        binding?.typeRadioGroup?.setOnCheckedChangeListener { _, checkedId ->
-           showContentCylinderCapacity(checkedId)
-        }
     }
 
-    private fun showContentCylinderCapacity(checkedId: Int) {
+    private fun setVisibilityContentCylinderCapacity(checkedId: Int) {
         binding?.contentCylinderCapacity?.visibility = when (checkedId) {
             R.id.option_motorcycle -> View.VISIBLE
             else -> View.GONE
         }
+    }
+
+    private fun clearCylinderCapacityEditText() {
+        binding?.addCylinderCapacityEditText?.text?.clear()
     }
 
     private fun setupVehicleBind(): VehicleBind {
@@ -99,21 +122,16 @@ class AddVehicleFragment : Fragment() {
 
     private fun checkFields(): Boolean {
 
-        val isRegisterValid = mandatoryFieldBackground(
-            field = Pair(binding?.addRegisterEditText, binding?.addRegisterTextView),
-            isValid = binding?.addRegisterEditText?.text?.trim()?.isNotEmpty() ?: false
+        val isRegisterValid = isRegisterValid(
+            binding?.addRegisterEditText?.text.toString()
         )
 
-        val isTypeVehicleValid = mandatoryFieldBackground(
-            field = Pair(binding?.typeRadioGroup, binding?.addTypeTextView),
-            isValid = binding?.typeRadioGroup?.checkedRadioButtonId != IS_NOT_CHECK
-        )
+        val isTypeVehicleValid = isTypeVehicleValid(binding?.typeRadioGroup?.checkedRadioButtonId)
 
         return if(binding?.contentCylinderCapacity?.visibility == View.VISIBLE) {
 
-            val isCylinderCapacity = mandatoryFieldBackground(
-                field = Pair(binding?.addCylinderCapacityEditText, binding?.addCylinderCapacityTextView),
-                isValid = binding?.addCylinderCapacityEditText?.text?.trim()?.isNotEmpty() ?: false
+            val isCylinderCapacity = isCylinderCapacity(
+                binding?.addCylinderCapacityEditText?.text.toString()
             )
 
             !(!isRegisterValid || !isTypeVehicleValid || !isCylinderCapacity)
@@ -121,6 +139,21 @@ class AddVehicleFragment : Fragment() {
             !(!isRegisterValid || !isTypeVehicleValid)
         }
     }
+
+    private fun isRegisterValid(text: String?) = mandatoryFieldBackground(
+        field = Pair(binding?.addRegisterEditText, binding?.addRegisterTextView),
+        isValid = text?.trim()?.isNotEmpty() ?: false
+    )
+
+    private fun isTypeVehicleValid(checkedId: Int?) = mandatoryFieldBackground(
+        field = Pair(binding?.typeRadioGroup, binding?.addTypeTextView),
+        isValid =  checkedId != IS_NOT_CHECK
+    )
+
+    private fun isCylinderCapacity(text: String?) = mandatoryFieldBackground(
+        field = Pair(binding?.addCylinderCapacityEditText, binding?.addCylinderCapacityTextView),
+        isValid = text?.trim()?.isNotEmpty() ?: false
+    )
 
     private fun mandatoryFieldBackground(field: Pair<View?, TextView?>, isValid: Boolean): Boolean {
         val (element, title) = field
