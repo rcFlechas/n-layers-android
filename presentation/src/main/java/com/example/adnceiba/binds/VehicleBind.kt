@@ -6,8 +6,13 @@ open class VehicleBind(
     override val id: Long,
     open val register: String
 ): ItemPicker {
+
     open val label: String = String()
+
     override val title: String
         get() = register
 
+    override fun toString(): String {
+        return title
+    }
 }
