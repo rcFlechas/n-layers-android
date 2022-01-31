@@ -7,11 +7,11 @@ import com.example.domain.valueobjects.TimeBusy
 
 class PlaceCarBuilder {
 
-    var id: Long = 0
-    var car: Car = CarBuilder.aCar().build()
-    var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
+    private var id: Long = 0
+    private var car: Car = CarBuilder.aCar().build()
+    private var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
         .build()
-    var state: State = State.BUSY
+    private var state: State = State.BUSY
 
     fun withId(id: Long): PlaceCarBuilder {
         this.id = id

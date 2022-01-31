@@ -14,12 +14,11 @@ import androidx.test.filters.LargeTest
 import com.example.adnceiba.R
 import com.example.adnceiba.di.androidTestModule
 import com.example.adnceiba.utilities.EspressoIdlingResource
-import com.example.domain.agregates.PlaceMotorCycle
+import com.example.domain.builders.MotorCycleBuilder.Companion.aMotorCycle
+import com.example.domain.builders.PlaceMotorCycleBuilder.Companion.aPlaceMotorCycle
 import com.example.domain.entities.MotorCycle
-import com.example.domain.enum.State
 import com.example.domain.services.PlaceService
 import com.example.domain.services.VehicleService
-import com.example.domain.valueobjects.TimeBusy
 import org.hamcrest.CoreMatchers.anything
 import org.junit.After
 import org.junit.Before
@@ -100,7 +99,10 @@ class MainActivityTest {
     fun addBusyPlace() {
 
         //GIVEN -  a vehicle type motorcycle
-        val vehicle = MotorCycle(0, "BBB", 600)
+        val vehicle = aMotorCycle()
+            .withRegister("BBB")
+            .withCylinderCapacity(600)
+            .build()
         vehicleService.saveVehicle(vehicle)
 
         //WHEN - launch Main Activity
@@ -128,11 +130,16 @@ class MainActivityTest {
         //GIVEN - a busy place of motorcycle
         val register = "BBB"
 
-        val insertVehicle = MotorCycle(0, register, 600)
+        val insertVehicle = aMotorCycle()
+            .withRegister(register)
+            .withCylinderCapacity(600)
+            .build()
         vehicleService.saveVehicle(insertVehicle)
         val vehicle = vehicleService.getVehiclesAll().firstOrNull()
 
-        val place = PlaceMotorCycle(0, vehicle as MotorCycle, TimeBusy(), State.BUSY)
+        val place = aPlaceMotorCycle()
+            .withVehicle(vehicle as MotorCycle)
+            .build()
         placeService.entry(place)
 
         //WHEN - launch Main Activity

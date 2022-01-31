@@ -2,17 +2,18 @@ package com.example.domain.builders
 
 import com.example.domain.agregates.PlaceMotorCycle
 import com.example.domain.builders.MotorCycleBuilder.Companion.aMotorCycle
+import com.example.domain.builders.TimeBusyBuilder.Companion.aTimeBusy
 import com.example.domain.entities.MotorCycle
 import com.example.domain.enum.State
 import com.example.domain.valueobjects.TimeBusy
 
 class PlaceMotorCycleBuilder {
 
-     var id: Long = 0
-     var motorCycle: MotorCycle = aMotorCycle().build()
-     var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
+     private var id: Long = 0
+     private var motorCycle: MotorCycle = aMotorCycle().build()
+     private var timeBusy: TimeBusy = aTimeBusy()
         .build()
-     var state: State = State.BUSY
+     private var state: State = State.BUSY
 
      fun withId(id: Long): PlaceMotorCycleBuilder {
         this.id = id
