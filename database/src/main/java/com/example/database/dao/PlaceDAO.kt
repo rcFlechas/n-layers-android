@@ -20,7 +20,7 @@ interface PlaceDAO {
     @Query("SELECT * FROM place WHERE plac_id = :id")
     fun getPlaceById(id: Long) : PlaceWithVehicleEntity
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun savePlace(place: PlaceEntity)
 
     @Query("UPDATE place SET plac_free_date =:freeDate, plac_state =:state WHERE plac_id =:id")
