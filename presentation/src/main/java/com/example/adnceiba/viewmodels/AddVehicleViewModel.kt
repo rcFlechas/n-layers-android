@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.adnceiba.binds.VehicleBind
 import com.example.adnceiba.mappers.VehicleBindToVehicle
+import com.example.adnceiba.ui.OnError
+import com.example.adnceiba.ui.OnLoading
+import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.ui.UIState
 import com.example.domain.services.VehicleService
 import io.reactivex.Completable
@@ -25,17 +28,17 @@ class AddVehicleViewModel(private val vehicleService: VehicleService) : ViewMode
         subscriptions.add(
             Completable.fromCallable { vehicleService.saveVehicle(VehicleBindToVehicle().map(vehicleBind)) }
                 .doOnSubscribe {
-                    _saveLiveData.postValue(Event(UIState.OnLoading(true)))
+                    _saveLiveData.postValue(Event(OnLoading(true)))
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onComplete = {
                         _saveLiveData.postValue(
-                            Event(UIState.OnSuccess( true))
+                            Event(OnSuccess( true))
                         )
                     },
                     onError = {
-                        _saveLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _saveLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )

@@ -12,7 +12,9 @@ import com.example.adnceiba.R
 import com.example.adnceiba.adapters.VehicleAdapter
 import com.example.adnceiba.databinding.FragmentVehiclesBinding
 import com.example.adnceiba.extensions.observeEvent
-import com.example.adnceiba.ui.UIState
+import com.example.adnceiba.ui.OnError
+import com.example.adnceiba.ui.OnLoading
+import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.utilities.Dialog
 import com.example.adnceiba.viewmodels.VehiclesViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,10 +32,10 @@ class VehiclesFragment : Fragment() {
         vehiclesViewModel.allVehiclesLiveData.observeEvent(viewLifecycleOwner) { uiState ->
 
             when (uiState) {
-                is UIState.OnLoading -> {
+                is OnLoading -> {
                     isLoading(uiState.loading)
                 }
-                is UIState.OnSuccess -> {
+                is OnSuccess -> {
                     isLoading(false)
                     val data = uiState.data
                     vehicleAdapter.clearData()
@@ -44,7 +46,7 @@ class VehiclesFragment : Fragment() {
                         dataEmpty(getString(R.string.message_list_empty))
                     }
                 }
-                is UIState.OnError -> {
+                is OnError -> {
                     isLoading(false)
                     Dialog.basic(requireContext(), uiState.error)
                     dataEmpty(uiState.error)

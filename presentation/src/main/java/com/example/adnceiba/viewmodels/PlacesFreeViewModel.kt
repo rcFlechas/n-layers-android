@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.adnceiba.binds.PlaceBind
 import com.example.adnceiba.mappers.PlaceToPlaceBind
+import com.example.adnceiba.ui.OnError
+import com.example.adnceiba.ui.OnLoading
+import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.ui.UIState
 import com.example.domain.enum.State
 import com.example.domain.mappers.ListMapperImpl
@@ -27,19 +30,20 @@ class PlacesFreeViewModel(private val placeService: PlaceService) : ViewModel() 
         subscriptions.add(
             Single.fromCallable { placeService.getPlacesAllByState(State.FREE) }
                 .doOnSubscribe {
-                    _allPlacesFreeLiveData.postValue(Event(UIState.OnLoading(true)))
+                    _allPlacesFreeLiveData.postValue(Event(OnLoading(true)))
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onSuccess = {
                         _allPlacesFreeLiveData.postValue(
                             Event(
-                                UIState.OnSuccess( ListMapperImpl(PlaceToPlaceBind())
-                                    .map(it)))
+                                OnSuccess( ListMapperImpl(PlaceToPlaceBind())
+                                    .map(it))
+                            )
                         )
                     },
                     onError = {
-                        _allPlacesFreeLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _allPlacesFreeLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )

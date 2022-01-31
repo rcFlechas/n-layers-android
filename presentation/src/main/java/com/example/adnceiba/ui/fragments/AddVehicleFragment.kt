@@ -15,7 +15,9 @@ import com.example.adnceiba.databinding.FragmentAddVehicleBinding
 import com.example.adnceiba.extensions.observeEvent
 import com.example.adnceiba.extensions.onChange
 import com.example.adnceiba.filters.EmojiFilter
-import com.example.adnceiba.ui.UIState
+import com.example.adnceiba.ui.OnError
+import com.example.adnceiba.ui.OnLoading
+import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.utilities.Dialog
 import com.example.adnceiba.viewmodels.AddVehicleViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,15 +34,15 @@ class AddVehicleFragment : Fragment() {
         addVehicleViewModel.saveLiveData.observeEvent(viewLifecycleOwner) { uiState ->
 
             when (uiState) {
-                is UIState.OnLoading -> {
+                is OnLoading -> {
                     isLoading(uiState.loading)
                 }
-                is UIState.OnSuccess -> {
+                is OnSuccess -> {
                     isLoading( false)
                     val isSave = uiState.data
                     if (isSave) requireActivity().onBackPressed()
                 }
-                is UIState.OnError -> {
+                is OnError -> {
                     isLoading( false)
                     Dialog.basic(requireContext(), uiState.error)
                 }

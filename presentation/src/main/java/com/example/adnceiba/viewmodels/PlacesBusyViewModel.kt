@@ -9,6 +9,9 @@ import com.example.adnceiba.binds.VehicleBind
 import com.example.adnceiba.mappers.PlaceBindToPlace
 import com.example.adnceiba.mappers.PlaceToPlaceBind
 import com.example.adnceiba.mappers.VehicleToVehicleBind
+import com.example.adnceiba.ui.OnError
+import com.example.adnceiba.ui.OnLoading
+import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.ui.UIState
 import com.example.domain.enum.State
 import com.example.domain.mappers.ListMapperImpl
@@ -44,19 +47,20 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
         subscriptions.add(
             Single.fromCallable { placeService.getPlacesAllByState(State.BUSY) }
                 .doOnSubscribe {
-                    _allPlacesBusyLiveData.postValue(Event(UIState.OnLoading(true)))
+                    _allPlacesBusyLiveData.postValue(Event(OnLoading(true)))
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onSuccess = {
                         _allPlacesBusyLiveData.postValue(
                             Event(
-                                UIState.OnSuccess( ListMapperImpl(PlaceToPlaceBind())
-                                .map(it)))
+                                OnSuccess( ListMapperImpl(PlaceToPlaceBind())
+                                .map(it))
+                            )
                         )
                     },
                     onError = {
-                        _allPlacesBusyLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _allPlacesBusyLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )
@@ -67,19 +71,19 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
         subscriptions.add(
             Single.fromCallable { placeService.getPlaceById(placeId) }
                 .doOnSubscribe {
-                    _allPlaceByIdLiveData.postValue(Event(UIState.OnLoading(true)))
+                    _allPlaceByIdLiveData.postValue(Event(OnLoading(true)))
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onSuccess = {
                         _allPlaceByIdLiveData.postValue(
                             Event(
-                                UIState.OnSuccess(PlaceToPlaceBind()
+                                OnSuccess(PlaceToPlaceBind()
                                     .map(it)))
                         )
                     },
                     onError = {
-                        _allPlaceByIdLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _allPlaceByIdLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )
@@ -93,12 +97,12 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
                 .subscribeBy(
                     onSuccess = {
                         _allVehiclesLiveData.postValue(
-                            Event(UIState.OnSuccess( ListMapperImpl(VehicleToVehicleBind())
+                            Event(OnSuccess( ListMapperImpl(VehicleToVehicleBind())
                                 .map(it)))
                         )
                     },
                     onError = {
-                        _allVehiclesLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _allVehiclesLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )
@@ -109,17 +113,17 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
         subscriptions.add(
             Completable.fromCallable { placeService.entry(PlaceBindToPlace().map(placeBind)) }
                 .doOnSubscribe {
-                    _saveLiveData.postValue(Event(UIState.OnLoading(true)))
+                    _saveLiveData.postValue(Event(OnLoading(true)))
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onComplete = {
                         _saveLiveData.postValue(
-                            Event(UIState.OnSuccess( true))
+                            Event(OnSuccess( true))
                         )
                     },
                     onError = {
-                        _saveLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _saveLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )
@@ -130,17 +134,17 @@ class PlacesBusyViewModel(private val placeService: PlaceService, private val ve
         subscriptions.add(
             Completable.fromCallable { placeService.exit(placeId) }
                 .doOnSubscribe {
-                    _freePlaceLiveData.postValue(Event(UIState.OnLoading(true)))
+                    _freePlaceLiveData.postValue(Event(OnLoading(true)))
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onComplete = {
                         _freePlaceLiveData.postValue(
-                            Event(UIState.OnSuccess( true))
+                            Event(OnSuccess( true))
                         )
                     },
                     onError = {
-                        _freePlaceLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _freePlaceLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )

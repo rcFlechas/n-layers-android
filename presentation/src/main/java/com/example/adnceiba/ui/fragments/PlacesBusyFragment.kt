@@ -12,7 +12,9 @@ import com.example.adnceiba.adapters.PlaceAdapter
 import com.example.adnceiba.binds.*
 import com.example.adnceiba.databinding.FragmentPlacesBusyBinding
 import com.example.adnceiba.extensions.observeEvent
-import com.example.adnceiba.ui.UIState
+import com.example.adnceiba.ui.OnError
+import com.example.adnceiba.ui.OnLoading
+import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.utilities.Dialog
 import com.example.adnceiba.viewmodels.PlacesBusyViewModel
 import com.example.adnceiba.widgets.PickerDialog
@@ -35,13 +37,11 @@ class PlacesBusyFragment : Fragment() {
         placesBusyViewModel.allVehiclesLiveData.observeEvent(viewLifecycleOwner) { uiState ->
 
             when (uiState) {
-                is UIState.OnLoading -> {
-                }
-                is UIState.OnSuccess -> {
+                is OnSuccess -> {
                     val data = uiState.data
                     vehiclesPickerDialog.setData(ArrayList(data))
                 }
-                is UIState.OnError -> {
+                is OnError -> {
                     Dialog.basic(requireContext(), uiState.error)
                     dataEmpty(uiState.error)
                 }
@@ -53,10 +53,10 @@ class PlacesBusyFragment : Fragment() {
         placesBusyViewModel.allPlacesBusyLiveData.observeEvent(viewLifecycleOwner) { uiState ->
 
             when (uiState) {
-                is UIState.OnLoading -> {
+                is OnLoading -> {
                     isLoading(uiState.loading)
                 }
-                is UIState.OnSuccess -> {
+                is OnSuccess -> {
                     isLoading(false)
                     val data = uiState.data
                     placeAdapter.clearData()
@@ -67,7 +67,7 @@ class PlacesBusyFragment : Fragment() {
                         dataEmpty(getString(R.string.message_list_empty))
                     }
                 }
-                is UIState.OnError -> {
+                is OnError -> {
                     isLoading(false)
                     Dialog.basic(requireContext(), uiState.error)
                     dataEmpty(uiState.error)
@@ -81,17 +81,17 @@ class PlacesBusyFragment : Fragment() {
         placesBusyViewModel.saveLiveData.observeEvent(viewLifecycleOwner) { uiState ->
 
             when (uiState) {
-                is UIState.OnLoading -> {
+                is OnLoading -> {
                     isLoading(uiState.loading)
                 }
-                is UIState.OnSuccess -> {
+                is OnSuccess -> {
                     isLoading( false)
                     val isSave = uiState.data
                     if (isSave) {
                         placesBusyViewModel.getAllPlacesBusy()
                     }
                 }
-                is UIState.OnError -> {
+                is OnError -> {
                     isLoading( false)
                     Dialog.basic(requireContext(), uiState.error)
                 }
@@ -104,17 +104,17 @@ class PlacesBusyFragment : Fragment() {
         placesBusyViewModel.freePlaceLiveData.observeEvent(viewLifecycleOwner) { uiState ->
 
             when (uiState) {
-                is UIState.OnLoading -> {
+                is OnLoading -> {
                     isLoading(uiState.loading)
                 }
-                is UIState.OnSuccess -> {
+                is OnSuccess -> {
                     isLoading( false)
                     val isSave = uiState.data
                     if (isSave) {
                         placesBusyViewModel.getAllPlacesBusy()
                     }
                 }
-                is UIState.OnError -> {
+                is OnError -> {
                     isLoading( false)
                     Dialog.basic(requireContext(), uiState.error)
                 }

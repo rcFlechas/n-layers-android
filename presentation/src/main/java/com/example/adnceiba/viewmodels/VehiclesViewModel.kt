@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.adnceiba.binds.VehicleBind
 import com.example.adnceiba.mappers.VehicleToVehicleBind
+import com.example.adnceiba.ui.OnError
+import com.example.adnceiba.ui.OnLoading
+import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.ui.UIState
 import com.example.domain.mappers.ListMapperImpl
 import com.example.domain.services.VehicleService
@@ -26,18 +29,20 @@ class VehiclesViewModel(private val vehicleService: VehicleService) : ViewModel(
         subscriptions.add(
             Single.fromCallable { vehicleService.getVehiclesAll() }
                 .doOnSubscribe {
-                    _allVehiclesLiveData.postValue(Event(UIState.OnLoading(true)))
+                    _allVehiclesLiveData.postValue(Event(OnLoading(true)))
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onSuccess = {
                         _allVehiclesLiveData.postValue(
-                            Event(UIState.OnSuccess( ListMapperImpl(VehicleToVehicleBind())
-                                .map(it)))
+                            Event(
+                                OnSuccess( ListMapperImpl(VehicleToVehicleBind())
+                                .map(it))
+                            )
                         )
                     },
                     onError = {
-                        _allVehiclesLiveData.postValue(Event( UIState.OnError(it.message ?: UIState.ERROR )))
+                        _allVehiclesLiveData.postValue(Event( OnError(it.message ?: OnError.ERROR )))
                     }
                 )
         )
