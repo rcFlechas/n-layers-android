@@ -1,6 +1,6 @@
 package com.example.domain.services.vehicle
 
-import com.example.domain.entities.CarBuilder
+import com.example.domain.builders.CarBuilder
 import com.example.domain.exceptions.RegisterCharactersNotAllowedException
 import com.example.domain.exceptions.RegisterLengthNotAllowedException
 import org.hamcrest.MatcherAssert

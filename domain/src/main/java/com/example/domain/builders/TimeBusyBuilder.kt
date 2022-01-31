@@ -1,4 +1,4 @@
-package com.example.domain.entities
+package com.example.domain.builders
 
 import com.example.domain.extensions.parseDateFormat
 import com.example.domain.valueobjects.TimeBusy

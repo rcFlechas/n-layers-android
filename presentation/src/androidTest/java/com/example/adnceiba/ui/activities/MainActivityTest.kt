@@ -161,4 +161,52 @@ class MainActivityTest {
         onView(withText("BBB")).check(matches(isDisplayed()))
         activityScenario.close()
     }
+
+    @Test
+    fun addBusyPlace_notPlaceAvailable() {
+
+//        var idToLong = 0L
+//        for (i in 1..PlaceService.MAX_CARS) {
+//
+//
+//
+//            idToLong = i.toLong()
+//            val place = PlaceCarBuilder.aPlaceCar()
+//                .withId(idToLong)
+//                .with(
+//                    CarBuilder.aCar()
+//                        .withId(idToLong)
+//                        .withRegister("D$idToLong")
+//                )
+//                .with(
+//                    TimeBusyBuilder.aTimeBusy()
+//                        .withBusyDate("2022-01-14T15:30")
+//                        .withFreeDate("2022-01-14T15:30")
+//                )
+//                .withState(State.BUSY)
+//                .build()
+//            //fakePlaceRepository.addPlaces(place)
+//        }
+//
+//        for (i in (PlaceService.MAX_CARS +1)..(PlaceService.MAX_CARS + PlaceService.MAX_MOTORCYCLE)) {
+//            idToLong = i.toLong()
+//            val place = PlaceMotorCycleBuilder.aPlaceMotorCycle()
+//                .withId(idToLong)
+//                .with(
+//                    MotorCycleBuilder.aMotorCycle()
+//                        .withId(idToLong)
+//                        .withRegister("D$idToLong")
+//                )
+//                .with(
+//                    TimeBusyBuilder.aTimeBusy()
+//                        .withBusyDate("2022-01-14T15:30")
+//                        .withFreeDate("2022-01-14T15:30")
+//                )
+//                .withState(State.BUSY)
+//                .build()
+//            //fakePlaceRepository.addPlaces(place)
+//        }
+
+
+    }
 }

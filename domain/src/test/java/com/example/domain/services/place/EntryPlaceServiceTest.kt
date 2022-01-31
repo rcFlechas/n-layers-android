@@ -1,6 +1,6 @@
 package com.example.domain.services.place
 
-import com.example.domain.entities.*
+import com.example.domain.builders.*
 import com.example.domain.enum.State
 import com.example.domain.exceptions.EntryNotAuthorizedException
 import com.example.domain.exceptions.NotPlaceAvailableException

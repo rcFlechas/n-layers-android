@@ -1,4 +1,6 @@
-package com.example.domain.entities
+package com.example.domain.builders
+
+import com.example.domain.entities.Vehicle
 
 
 abstract class VehicleBuilder {

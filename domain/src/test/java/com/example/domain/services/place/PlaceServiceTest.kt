@@ -1,8 +1,8 @@
 package com.example.domain.services.place
 
-import com.example.domain.entities.CarBuilder.Companion.aCar
-import com.example.domain.entities.PlaceCarBuilder.Companion.aPlaceCar
-import com.example.domain.entities.TimeBusyBuilder.Companion.aTimeBusy
+import com.example.domain.builders.CarBuilder.Companion.aCar
+import com.example.domain.builders.PlaceCarBuilder.Companion.aPlaceCar
+import com.example.domain.builders.TimeBusyBuilder.Companion.aTimeBusy
 import com.example.domain.enum.State
 import com.example.domain.fakes.FakePlaceRepository
 import com.example.domain.services.PlaceService
@@ -20,13 +20,25 @@ open class PlaceServiceTest {
         fakePlaceRepository = FakePlaceRepository()
 
         val place1 = aPlaceCar()
+            .withId(1)
+            .with(
+                aCar()
+                    .withId(1)
+                    .withRegister("DDD")
+            )
+            .with(
+                aTimeBusy()
+                    .withBusyDate("2022-01-14T13:30")
+                    .withFreeDate("2022-01-14T14:00")
+            )
+            .withState(State.FREE)
             .build()
 
         val place2 = aPlaceCar()
             .withId(2)
             .with(
                 aCar()
-                    .withId(3)
+                    .withId(2)
                     .withRegister("CCC")
             )
             .with(

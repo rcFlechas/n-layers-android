@@ -1,10 +1,12 @@
-package com.example.domain.entities
+package com.example.domain.builders
+
+import com.example.domain.entities.Car
 
 
 class CarBuilder : VehicleBuilder() {
 
-    override var id: Long = 1
-    override var register: String = "AAA"
+    override var id: Long = 0
+    override var register: String = String()
 
     override fun withId(id: Long): CarBuilder {
         this.id = id

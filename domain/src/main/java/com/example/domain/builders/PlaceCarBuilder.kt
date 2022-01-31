@@ -1,18 +1,17 @@
-package com.example.domain.entities
+package com.example.domain.builders
 
 import com.example.domain.agregates.PlaceCar
+import com.example.domain.entities.Car
 import com.example.domain.enum.State
 import com.example.domain.valueobjects.TimeBusy
 
 class PlaceCarBuilder {
 
-    var id: Long = 1
+    var id: Long = 0
     var car: Car = CarBuilder.aCar().build()
     var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
-        .withBusyDate(BUSY_DATE)
-        .withFreeDate(FREE_DATE)
         .build()
-    var state: State = State.FREE
+    var state: State = State.BUSY
 
     fun withId(id: Long): PlaceCarBuilder {
         this.id = id
@@ -47,9 +46,6 @@ class PlaceCarBuilder {
     fun build() = PlaceCar(id, car, timeBusy, state)
 
     companion object {
-        private const val BUSY_DATE = "2022-01-14T13:30"
-        private const val FREE_DATE = "2022-01-14T14:00"
-
         fun aPlaceCar() = PlaceCarBuilder()
     }
 }

@@ -1,6 +1,6 @@
 package com.example.domain.services.vehicle
 
-import com.example.domain.entities.CarBuilder
+import com.example.domain.builders.CarBuilder
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
 import org.junit.Test

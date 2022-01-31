@@ -1,6 +1,7 @@
-package com.example.domain.entities
+package com.example.domain.builders
 
 import com.example.domain.agregates.Place
+import com.example.domain.entities.Vehicle
 import com.example.domain.enum.State
 import com.example.domain.valueobjects.TimeBusy
 

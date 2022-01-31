@@ -1,19 +1,18 @@
-package com.example.domain.entities
+package com.example.domain.builders
 
 import com.example.domain.agregates.PlaceMotorCycle
-import com.example.domain.entities.MotorCycleBuilder.Companion.aMotorCycle
+import com.example.domain.builders.MotorCycleBuilder.Companion.aMotorCycle
+import com.example.domain.entities.MotorCycle
 import com.example.domain.enum.State
 import com.example.domain.valueobjects.TimeBusy
 
 class PlaceMotorCycleBuilder {
 
-     var id: Long = 1
+     var id: Long = 0
      var motorCycle: MotorCycle = aMotorCycle().build()
      var timeBusy: TimeBusy = TimeBusyBuilder.aTimeBusy()
-        .withBusyDate(BUSY_DATE)
-        .withFreeDate(FREE_DATE)
         .build()
-     var state: State = State.FREE
+     var state: State = State.BUSY
 
      fun withId(id: Long): PlaceMotorCycleBuilder {
         this.id = id
@@ -48,9 +47,6 @@ class PlaceMotorCycleBuilder {
      fun build() = PlaceMotorCycle(id, motorCycle, timeBusy, state)
 
     companion object {
-        private const val BUSY_DATE = "2022-01-14T13:30"
-        private const val FREE_DATE = "2022-01-14T14:00"
-
-        fun aPlaceMotorCycle() = PlaceMotorCycleBuilder()
+       fun aPlaceMotorCycle() = PlaceMotorCycleBuilder()
     }
 }

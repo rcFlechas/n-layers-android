@@ -1,8 +1,8 @@
 package com.example.domain.services.place
 
-import com.example.domain.entities.CarBuilder
-import com.example.domain.entities.PlaceCarBuilder
-import com.example.domain.entities.TimeBusyBuilder
+import com.example.domain.builders.CarBuilder
+import com.example.domain.builders.PlaceCarBuilder
+import com.example.domain.builders.TimeBusyBuilder
 import com.example.domain.enum.State
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
