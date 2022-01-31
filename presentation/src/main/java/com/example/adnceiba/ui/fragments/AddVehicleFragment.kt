@@ -14,12 +14,13 @@ import com.example.adnceiba.binds.VehicleBind
 import com.example.adnceiba.databinding.FragmentAddVehicleBinding
 import com.example.adnceiba.extensions.observeEvent
 import com.example.adnceiba.extensions.onChange
-import com.example.adnceiba.filters.EmojiFilter
+import com.example.adnceiba.filters.CustomFilter
 import com.example.adnceiba.ui.OnError
 import com.example.adnceiba.ui.OnLoading
 import com.example.adnceiba.ui.OnSuccess
 import com.example.adnceiba.utilities.Dialog
 import com.example.adnceiba.viewmodels.AddVehicleViewModel
+import com.example.domain.entities.Vehicle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddVehicleFragment : Fragment() {
@@ -82,7 +83,10 @@ class AddVehicleFragment : Fragment() {
     }
 
     private fun setupFilters() {
-        binding?.addRegisterEditText?.filters = EmojiFilter.filter
+        binding?.addRegisterEditText?.filters = arrayOf(
+                CustomFilter.emojiFilter,
+                CustomFilter.lengthFilter(Vehicle.REGISTER_LENGTH)
+        )
     }
 
     private fun setupClickEvents() {

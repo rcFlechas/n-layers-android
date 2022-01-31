@@ -55,7 +55,7 @@ class SaveVehicleServiceTest : VehicleServiceTest() {
             val vehicleId = 3L
             CarBuilder.aCar()
                 .withId(vehicleId)
-                .withRegister("CCCC")
+                .withRegister("CCCCCCC")
                 .build()
             false
         } catch (registerLengthNotAllowedException: RegisterLengthNotAllowedException) {

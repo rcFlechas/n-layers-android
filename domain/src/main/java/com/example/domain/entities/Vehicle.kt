@@ -26,11 +26,11 @@ open class Vehicle(open var id: Long, register: String) {
     }
 
     private fun isValidLengthRegister(register: String): Boolean {
-        return register.length <= LENGTH_REGISTER_REGEX
+        return register.length <= REGISTER_LENGTH
     }
 
     companion object {
         private const val CHARACTER_REGISTER_REGEX = "^$|^[a-zA-Z0-9]+$"
-        private const val LENGTH_REGISTER_REGEX = 3
+        const val REGISTER_LENGTH = 6
     }
 }
