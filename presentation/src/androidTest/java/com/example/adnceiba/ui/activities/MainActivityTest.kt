@@ -8,14 +8,18 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.adnceiba.R
 import com.example.adnceiba.di.androidTestModule
 import com.example.adnceiba.utilities.EspressoIdlingResource
+import com.example.domain.builders.CarBuilder.Companion.aCar
 import com.example.domain.builders.MotorCycleBuilder.Companion.aMotorCycle
+import com.example.domain.builders.PlaceCarBuilder.Companion.aPlaceCar
 import com.example.domain.builders.PlaceMotorCycleBuilder.Companion.aPlaceMotorCycle
+import com.example.domain.entities.Car
 import com.example.domain.entities.MotorCycle
 import com.example.domain.services.PlaceService
 import com.example.domain.services.VehicleService
@@ -172,48 +176,64 @@ class MainActivityTest {
     @Test
     fun addBusyPlace_notPlaceAvailable() {
 
-//        var idToLong = 0L
-//        for (i in 1..PlaceService.MAX_CARS) {
-//
-//
-//
-//            idToLong = i.toLong()
-//            val place = PlaceCarBuilder.aPlaceCar()
-//                .withId(idToLong)
-//                .with(
-//                    CarBuilder.aCar()
-//                        .withId(idToLong)
-//                        .withRegister("D$idToLong")
-//                )
-//                .with(
-//                    TimeBusyBuilder.aTimeBusy()
-//                        .withBusyDate("2022-01-14T15:30")
-//                        .withFreeDate("2022-01-14T15:30")
-//                )
-//                .withState(State.BUSY)
-//                .build()
-//            //fakePlaceRepository.addPlaces(place)
-//        }
-//
-//        for (i in (PlaceService.MAX_CARS +1)..(PlaceService.MAX_CARS + PlaceService.MAX_MOTORCYCLE)) {
-//            idToLong = i.toLong()
-//            val place = PlaceMotorCycleBuilder.aPlaceMotorCycle()
-//                .withId(idToLong)
-//                .with(
-//                    MotorCycleBuilder.aMotorCycle()
-//                        .withId(idToLong)
-//                        .withRegister("D$idToLong")
-//                )
-//                .with(
-//                    TimeBusyBuilder.aTimeBusy()
-//                        .withBusyDate("2022-01-14T15:30")
-//                        .withFreeDate("2022-01-14T15:30")
-//                )
-//                .withState(State.BUSY)
-//                .build()
-//            //fakePlaceRepository.addPlaces(place)
-//        }
+        //GIVEN - 20 vehicles type cars and 20 places type car.
+        for (i in 1..PlaceService.MAX_CARS) {
+            val insertVehicle = aCar()
+                .withId(i.toLong())
+                .withRegister("CAR$i")
+                .build()
+            vehicleService.saveVehicle(insertVehicle)
+            val vehicle = vehicleService.getVehicleById(i.toLong())
 
+            val place = aPlaceCar()
+                .withVehicle(vehicle as Car)
+                .build()
+            placeService.entry(place)
+        }
 
+        // and 20 vehicles type motorcycles and 10 places type motorcycle.
+        for (i in (PlaceService.MAX_CARS +1)..(PlaceService.MAX_CARS + PlaceService.MAX_MOTORCYCLE)) {
+            val insertVehicle = aMotorCycle()
+                .withId(i.toLong())
+                .withRegister("MOT$i")
+                .withCylinderCapacity(100)
+                .build()
+            vehicleService.saveVehicle(insertVehicle)
+            val vehicle = vehicleService.getVehicleById(i.toLong())
+
+            val place = aPlaceMotorCycle()
+                .withVehicle(vehicle as MotorCycle)
+                .build()
+            placeService.entry(place)
+        }
+
+        // and one more vehicle type motorcycle
+        val register = "BBB"
+        val insertVehicle = aMotorCycle()
+            .withRegister(register)
+            .withCylinderCapacity(600)
+            .build()
+        vehicleService.saveVehicle(insertVehicle)
+
+        //WHEN - launch Main Activity
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        //and perform click on tab places busy
+        onView(withId(R.id.navPlacesBusyFragment)).perform(click())
+
+        //and perform click on button Add Place
+        onView(withId(R.id.fabAddPlace)).perform(click())
+
+        //and perform click at last position in dialog single selection
+        onData(anything())
+            .atPosition(30)
+            .perform(click())
+
+        //THEN - check view is dialog and contains message "There is no place available".
+        onView(withText("There is no place available."))
+            .inRoot(isDialog())
+            .check(matches(isDisplayed()))
+
+        activityScenario.close()
     }
 }
