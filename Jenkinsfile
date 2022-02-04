@@ -1,8 +1,6 @@
 pipeline {
 
-    agent {
-        label 'Slave_Mac'
-    }
+    agent any
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '3'))
