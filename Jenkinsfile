@@ -9,9 +9,9 @@ pipeline {
      	disableConcurrentBuilds()
     }
 
-    tools {
-        jdk 'JAVA11_HOME'
-    }
+//     tools {
+//         jdk 'JAVA11_HOME'
+//     }
 
     stages {
         stage('Compile') {
