@@ -1,19 +1,10 @@
 package com.example.adnceiba.ui.activities
 
-import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.Espresso.onData
-import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.RootMatchers.isDialog
-import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.example.adnceiba.R
 import com.example.adnceiba.di.androidTestModule
+import com.example.adnceiba.pages.*
 import com.example.adnceiba.utilities.EspressoIdlingResource
 import com.example.domain.builders.CarBuilder.Companion.aCar
 import com.example.domain.builders.MotorCycleBuilder.Companion.aMotorCycle
@@ -23,7 +14,6 @@ import com.example.domain.entities.Car
 import com.example.domain.entities.MotorCycle
 import com.example.domain.services.PlaceService
 import com.example.domain.services.VehicleService
-import org.hamcrest.CoreMatchers.anything
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -67,36 +57,22 @@ class MainActivityTest {
     @Test
     fun addVehicle() {
 
-        //WHEN - launch Main Activity
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-        val registerVehicle = "BBB"
-
-        //and perform click on tab Vehicles
-        onView(withId(R.id.navVehiclesFragment)).perform(click())
-        //and perform click on button Add Vehicle
-        onView(withId(R.id.fabAddVehicle)).perform(click())
-
-        //and enter data in the form
-        onView(withId(R.id.add_register_edit_text))
-            .perform(typeText(registerVehicle), closeSoftKeyboard())
-        onView(withId(R.id.option_motorcycle))
-            .perform(click())
-            .check(matches(isChecked()))
-        onView(withId(R.id.add_cylinder_capacity_text_view))
-            .check(matches(isDisplayed()))
-        onView(withId(R.id.add_cylinder_capacity_text_view))
-            .check(matches(withText(R.string.title_add_cylinder_capacity)))
-        onView(withId(R.id.add_cylinder_capacity_edit_text))
-            .check(matches(isDisplayed()))
-        onView(withId(R.id.add_cylinder_capacity_edit_text))
-            .perform(typeText("600"), closeSoftKeyboard())
-
-        //and perform click on button Save
-        onView(withId(R.id.save_vehicle_button)).perform(click())
-
-        //THEN - check view Vehicle with text BBB.
-        onView(withText(registerVehicle)).check(matches(isDisplayed()))
-        activityScenario.close()
+        val mainPage = MainPage()
+        mainPage
+            .launch() //WHEN - launch Main Activity
+            .on<NavigationBottomPage>()
+            .vehiclesTab() //and perform click on tab Vehicles
+            .on<VehiclesPage>()
+            .fabButtonClick() //and perform click on button Add Vehicle
+            .on<AddVehiclePage>()
+            .typeTextRegister("BBB") //and enter register in the form
+            .checkMotorCycleRadioButton() //and checked motorcycle radio button in the form
+            .typeTextCylinderCapacity("600") //and enter cylinder capacity in the form
+            .saveButtonClick() //and perform click on button Save
+            .on<VehiclesPage>()
+            .withTitle("BBB") //THEN - check item Vehicle with text BBB.
+        mainPage
+            .close()
     }
 
     @Test
@@ -109,23 +85,20 @@ class MainActivityTest {
             .build()
         vehicleService.saveVehicle(vehicle)
 
-        //WHEN - launch Main Activity
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        //and perform click on tab places busy
-        onView(withId(R.id.navPlacesBusyFragment)).perform(click())
-
-        //and perform click on button Add Place
-        onView(withId(R.id.fabAddPlace)).perform(click())
-
-        //and perform click at position in dialog single selection
-        onData(anything())
-            .atPosition(0)
-            .perform(click())
-
-        //THEN - check view place with Vehicle text BBB.
-        onView(withText("BBB")).check(matches(isDisplayed()))
-        activityScenario.close()
+        val mainPage = MainPage()
+        mainPage
+            .launch() //WHEN - launch Main Activity
+            .on<NavigationBottomPage>()
+            .placesBusyTab() //and perform click on tab places busy
+            .on<PlacesBusyPage>()
+            .fabButtonClick() //and perform click on button Add Place
+            .on<DialogPage>()
+            .verify("Vehicles")
+            .selectPosition(0) //and perform click at position in dialog single selection
+            .on<PlacesBusyPage>()
+            .withTitle("BBB") //THEN - check view place with Vehicle text BBB.
+        mainPage
+            .close()
     }
 
     @Test
@@ -146,31 +119,23 @@ class MainActivityTest {
             .build()
         placeService.entry(place)
 
-        //WHEN - launch Main Activity
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        //and perform click on tab places busy
-        onView(withId(R.id.navPlacesBusyFragment)).perform(click())
-
-        //and perform long click on first item list
-        onView(withId(R.id.place_recycler_view))
-            .perform(
-                RecyclerViewActions.actionOnItem<RecyclerView.ViewHolder>(
-                hasDescendant(withText(register)), longClick()))
-
-        //and perform click on item context menu with text Free
-        onData(anything())
-            .atPosition(0)
-            .perform(click())
-
-        //THEN - check view displayed List is Empty.
-        onView(withText(R.string.message_list_empty)).check(matches(isDisplayed()))
-        //and perform click on tab places free
-        onView(withId(R.id.navPlacesFreeFragment)).perform(click())
-
-        //and - check view place with Vehicle text BBB.
-        onView(withText("BBB")).check(matches(isDisplayed()))
-        activityScenario.close()
+        val mainPage = MainPage()
+        mainPage
+            .launch() //WHEN - launch Main Activity
+            .on<NavigationBottomPage>()
+            .placesBusyTab() //and perform click on tab places busy
+            .on<PlacesBusyPage>()
+            .longClick(register) //and perform long click on first item list
+            .on<DialogPage>()
+            .selectPosition(0) //and perform click on item context menu with text Free
+            .on<PlacesBusyPage>()
+            .isListEmpty() //THEN - check view displayed List is Empty.
+            .on<NavigationBottomPage>()
+            .placesFreeTab() //and perform click on tab places free
+            .on<PlacesFreePage>()
+            .withTitle("BBB") //and - check view place with Vehicle text BBB.
+        mainPage
+            .close()
     }
 
     @Test
@@ -215,25 +180,20 @@ class MainActivityTest {
             .build()
         vehicleService.saveVehicle(insertVehicle)
 
-        //WHEN - launch Main Activity
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        val mainPage = MainPage()
+        mainPage
+            .launch() //WHEN - launch Main Activity
+            .on<NavigationBottomPage>()
+            .placesBusyTab() //and perform click on tab places busy
+            .on<PlacesBusyPage>()
+            .fabButtonClick() //and perform click on button Add Place
 
-        //and perform click on tab places busy
-        onView(withId(R.id.navPlacesBusyFragment)).perform(click())
-
-        //and perform click on button Add Place
-        onView(withId(R.id.fabAddPlace)).perform(click())
-
-        //and perform click at last position in dialog single selection
-        onData(anything())
-            .atPosition(30)
-            .perform(click())
-
-        //THEN - check view is dialog and contains message "There is no place available".
-        onView(withText("There is no place available."))
-            .inRoot(isDialog())
-            .check(matches(isDisplayed()))
-
-        activityScenario.close()
+            .on<DialogPage>()
+            .verify("Vehicles")
+            .selectPosition(30) //and perform click at last position in dialog single selection
+            .on<DialogPage>()
+            .verify("There is no place available.") //THEN - check view is dialog and contains message "There is no place available".
+        mainPage
+            .close()
     }
 }

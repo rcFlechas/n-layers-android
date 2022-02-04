@@ -195,7 +195,7 @@ class PlacesBusyFragment : Fragment() {
             placesBusyViewModel.freePlace(placeBind.id)
         }
         placeAdapter.setHasStableIds(true)
-        binding?.placeRecyclerView?.apply {
+        binding?.includePlaceRecyclerView?.placeRecyclerView?.apply {
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
             setHasFixedSize(true)
             adapter = placeAdapter
@@ -211,13 +211,13 @@ class PlacesBusyFragment : Fragment() {
     }
 
     private fun dataEmpty(text: String = String()) {
-        binding?.placeRecyclerView?.visibility = View.GONE
+        binding?.includePlaceRecyclerView?.placeRecyclerView?.visibility = View.GONE
         binding?.includeEmptyView?.root?.visibility = View.VISIBLE
         binding?.includeEmptyView?.emptyTextView?.text = text
     }
 
     private fun dataNoEmpty() {
-        binding?.placeRecyclerView?.visibility = View.VISIBLE
+        binding?.includePlaceRecyclerView?.placeRecyclerView?.visibility = View.VISIBLE
         binding?.includeEmptyView?.root?.visibility = View.GONE
     }
 
