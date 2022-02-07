@@ -30,14 +30,14 @@ pipeline {
                 sh './gradlew jacocoTestReport'
             }
         }
-        stage('Static Code Analysis') {
-            steps {
-                echo "------------>Static Code Analysis<------------"
-                withSonarQubeEnv('Sonar') {
-                    sh "${tool name: 'SonarScanner-Mac', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
-                }
-            }
-        }
+//         stage('Static Code Analysis') {
+//             steps {
+//                 echo "------------>Static Code Analysis<------------"
+//                 withSonarQubeEnv('Sonar') {
+//                     sh "${tool name: 'SonarScanner-Mac', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+//                 }
+//             }
+//         }
     }
 
     post {
